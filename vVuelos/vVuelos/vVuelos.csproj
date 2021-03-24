@@ -167,15 +167,92 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\airline.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\airport_gates.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\card.cs">
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\city.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\consecutive.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\country.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\easy_pay.cs">
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\error.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\flight.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\flight_tickets.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\log_book.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\reservation.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\role.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transaction.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vVuelosModelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>vVuelosModelo.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vVuelosModelo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vVuelosModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vVuelosModelo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>vVuelosModelo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vVuelos_paymentModelo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vVuelos_paymentModelo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vVuelos_paymentModelo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vVuelos_paymentModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vVuelos_paymentModelo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>vVuelos_paymentModelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,6 +268,22 @@
     <Content Include="Models\vVuelosModelo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>vVuelosModelo.Context.cs</LastGenOutput>
+      <DependentUpon>vVuelosModelo.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\vVuelosModelo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>vVuelosModelo.edmx</DependentUpon>
+      <LastGenOutput>vVuelosModelo.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\vVuelos_paymentModelo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>vVuelos_paymentModelo.edmx</DependentUpon>
+      <LastGenOutput>vVuelos_paymentModelo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\vVuelos_paymentModelo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>vVuelos_paymentModelo.edmx</DependentUpon>
+      <LastGenOutput>vVuelos_paymentModelo.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -217,9 +310,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>vVuelosModelo.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\vVuelosModelo.edmx.diagram">
+    <Content Include="Models\vVuelosModelo.edmx.diagram">
       <DependentUpon>vVuelosModelo.edmx</DependentUpon>
-    </None>
+    </Content>
+    <EntityDeploy Include="Models\vVuelos_paymentModelo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>vVuelos_paymentModelo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\vVuelos_paymentModelo.edmx.diagram">
+      <DependentUpon>vVuelos_paymentModelo.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
