@@ -12,27 +12,21 @@ namespace vVuelos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class card
+    public partial class customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public card()
+        public customer()
         {
-            this.customers = new HashSet<customer>();
+            this.cards = new HashSet<card>();
         }
     
-        public int id { get; set; }
-        public string card_number { get; set; }
-        public int expiration_month { get; set; }
-        public int expiration_year { get; set; }
-        public int cvv { get; set; }
-        public string issuer { get; set; }
-        public Nullable<int> is_credit_card { get; set; }
-        public Nullable<int> is_debit_card { get; set; }
-        public Nullable<int> credit_limit { get; set; }
-        public Nullable<int> balance { get; set; }
-        public bool active { get; set; }
+        public int user_id { get; set; }
+        public int easy_pay_id { get; set; }
+        public string name { get; set; }
+        public string last_name { get; set; }
     
+        public virtual easy_pay easy_pay { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<customer> customers { get; set; }
+        public virtual ICollection<card> cards { get; set; }
     }
 }
