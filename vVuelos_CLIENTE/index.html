@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vVuelos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="side-bar">
+        <div class="close-btn">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="menu">
+          <div class="item">
+            <a class="sub-btn"><i class=""></i>Seguridad<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a class="sub-btn"><i class=""></i>Usuarios<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                <a href="#" class="sub-item">Crear Usuarios</a>
+              <a href="#" class="sub-item">Asignar Roles</a>
+            </div>
+            <a href="#" class="sub-item">Cambiar Contraseña</a>
+        </div>
+          </div>
+          <div class="item">
+            <a class="sub-btn"><i class=""></i>Administracion<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+              <a href="#" class="sub-item">Consecutivos</a>
+              <a href="#" class="sub-item">Paises</a>
+              <a href="#" class="sub-item">Aerolineas</a>
+              <a href="#" class="sub-item">Puertas del Aeropuerto</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="sub-btn"><i class=""></i>Consultas<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+              <a href="#" class="sub-item">Bitacora</a>
+              <a href="#" class="sub-item">Errores</a>
+              <a href="#" class="sub-item">Descargas</a>
+              <a href="#" class="sub-item">Aerolineas</a>
+              <a href="#" class="sub-item">Puertas</a>
+            </div>
+          </div>
+          <div class="item"><a href="#"><i class=""></i>Cerrar Sesion</a></div>
+      <section class="main">
+        <h1>vVuelos</h1>
+      </section>
+   
+      <script type="text/javascript">
+      $(document).ready(function(){
+        //jquery for toggle sub menus
+        $('.sub-btn').click(function(){
+          $(this).next('.sub-menu').slideToggle();
+          $(this).find('.dropdown').toggleClass('rotate');
+        });
+   
+        //jquery for expand and collapse the sidebar
+        $('.menu-btn').click(function(){
+          $('.side-bar').addClass('active');
+          $('.menu-btn').css("visibility", "hidden");
+        });
+   
+        $('.close-btn').click(function(){
+          $('.side-bar').removeClass('active');
+          $('.menu-btn').css("visibility", "visible");
+        });
+      });
+      </script>
+   
+    </body>
+   </html>
+         
