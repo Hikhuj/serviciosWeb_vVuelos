@@ -5,7 +5,9 @@ using System.Web;
 
 namespace vVuelos.Classes
 {
-    public class Flight
+    public class UserCardData
     {
+        public int user_id_FK { get; set; }
+        public int cards_FK { get; set; }
     }
 }

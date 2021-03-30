@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+    <title>Ver Usuario</title>
+</head>
+
+<body>
+
+    <!-- MENU PRINCIPAL -->
+    <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-bar">
+        <div class="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="menu">
+            <!-- BACK MENU -->
+            <div class="item"><a href="../index.html"><i class=""></i>Inicio</a></div>
+            <!-- / BACK MENU -->
+            <div class="item">
+                <a class="sub-btn"><i class=""></i>Seguridad<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a class="sub-btn"><i class=""></i>Usuarios<i class="fas fa-angle-right dropdown"></i></a>
+                    <div class="sub-menu">
+                        <a href="../pages/crearUsuario.html" class="sub-item">Crear Usuarios</a>
+                        <a href="#" class="sub-item">Asignar Roles</a>
+                    </div>
+                    <a href="../pages/cambiarPassword.html" class="sub-item">Cambiar Contraseña</a>
+                </div>
+            </div>
+            <div class="item">
+                <a class="sub-btn"><i class=""></i>Administracion<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="../pages/editarConsecutivo.html" class="sub-item">Consecutivos</a>
+                    <a href="../pages/listaPais.html" class="sub-item">Paises</a>
+                    <a href="../pages/listaAerolinea.html" class="sub-item">Aerolineas</a>
+                    <a href="../pages/muestraPuertas.html" class="sub-item">Puertas del Aeropuerto</a>
+                </div>
+            </div>
+            <div class="item">
+                <a class="sub-btn"><i class=""></i>Consultas<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="../pages/consultaError.html" class="sub-item">Bitacora</a>
+                    <a href="../pages/consultaError.html" class="sub-item">Errores</a>
+                    <a href="#" class="sub-item">Descargas</a>
+                    <a href="../pages/listaAerolinea.html" class="sub-item">Aerolineas</a>
+                    <a href="#" class="sub-item">Puertas</a>
+                </div>
+            </div>
+            <div class="item"><a href="#"><i class=""></i>Cerrar Sesion</a></div>
+            <section class="main">
+                <h1>vVuelos</h1>
+            </section>
+        </div>
+    </div>
+    <!-- / MENU PRINCIPAL -->
+
+    <form>
+        <section class="form-register">
+            <h2>Lista de Usuarios</h2>
+            <br>
+            <textarea name="listaUsuarios" id="txtAreaUsuarios" cols="22" rows="10"></textarea>
+            <br>
+            <br>
+            <h3>Lista de Roles</h3>
+            <br>
+            <input type="checkbox" id="cBoxAdmin" name="Administrador-1" value="Administrador">
+            <label for="cBoxAdmin">Administrador</label>
+            <input type="checkbox" id="cBoxSeguridad" name="Seguridad-2" value="Seguridad">
+            <label for="cBoxSeguridad">Seguridad</label>
+            <input type="checkbox" id="cBoxMantenimiento" name="Mantenimiento-3" value="Mantenimiento">
+            <label for="cBoxMantenimiento">Mantenimiento</label>
+            <input type="checkbox" id="cBoxConsultas" name="Consultas-4" value="Consultas">
+            <label for="cBoxConsultas">Consultas</label>
+            <br>
+            <input class="buttons" type="submit" id="btnActualizarRoles" value="Actualizar Roles">
+        </section>
+    </form>
+
+    <script type="text/javascript" src="../js/floatingMenu.js"></script>
+
+</body>
+
+</html>
