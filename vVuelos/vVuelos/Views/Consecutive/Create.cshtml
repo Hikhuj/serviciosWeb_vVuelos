@@ -1,0 +1,107 @@
+﻿@model vVuelos.Models.consecutive
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>consecutive</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select class="btn btn-secondary btn-lg dropdown-toggle" name="description" id="description">
+                <option class="controls" value="Paises">Paises</option>
+                <option class="controls" value="Aerolineas">Aerolineas</option>
+                <option class="controls" value="Puertas">Puertas del Aeropuerto</option>
+                <option class="controls" value="Ticketes">Compras de Boletos</option>
+                <option class="controls" value="Reservas">Reservaciones de Boletos</option>
+                <option class="controls" value="Vuelos">Vuelos</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.value, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.value, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.value, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="checkbox" >Has prefix?</label>
+        <input type="checkbox" class="checkbox" onchange="enablePrefix()" id="hasprefix"/>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.prefix, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.prefix, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+            @Html.ValidationMessageFor(model => model.prefix, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="checkbox" >Has range?</label>
+        <input type="checkbox" class="checkbox" onchange="enableRange()" id="hasrange"/>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.range_int, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.range_int, new { htmlAttributes = new { @class = "form-control", @disabled="true"} })
+            @Html.ValidationMessageFor(model => model.range_int, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.range_out, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.range_out, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+            @Html.ValidationMessageFor(model => model.range_out, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    function enablePrefix() {
+        console.log("Executed")
+        if (document.getElementById("hasprefix").checked == true) {
+            console.log("passed")
+            document.getElementById("prefix").disabled = false;
+        } else {
+            document.getElementById("prefix").disabled = true;
+        }
+    }
+    function enableRange() {
+        if (document.getElementById("hasrange").checked == true) {
+            document.getElementById("range_int").disabled = false;
+            document.getElementById("range_out").disabled = false;
+        } else {
+            document.getElementById("range_int").disabled = true;
+            document.getElementById("range_out").disabled = true;
+        }
+    }
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

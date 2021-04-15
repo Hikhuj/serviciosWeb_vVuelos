@@ -56,11 +56,17 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -173,28 +179,20 @@
     <Compile Include="Classes\FlightData.cs" />
     <Compile Include="Classes\FlightTicketData.cs" />
     <Compile Include="Classes\LogBookData.cs" />
+    <Compile Include="Classes\NumberValidation.cs" />
     <Compile Include="Classes\ReservationData.cs" />
     <Compile Include="Classes\RolData.cs" />
     <Compile Include="Classes\TransactionData.cs" />
     <Compile Include="Classes\UserData.cs" />
     <Compile Include="Classes\UserCardData.cs" />
-    <Compile Include="Controllers\AirlinesController.cs" />
-    <Compile Include="Controllers\AirportGatesController.cs" />
-    <Compile Include="Controllers\CardsController.cs" />
-    <Compile Include="Controllers\CitiesController.cs" />
-    <Compile Include="Controllers\ConsecutivesController.cs" />
-    <Compile Include="Controllers\CountriesCitiesController.cs" />
-    <Compile Include="Controllers\CountriesController.cs" />
-    <Compile Include="Controllers\ErrorsController.cs" />
-    <Compile Include="Controllers\FlightsController.cs" />
-    <Compile Include="Controllers\FlightTicketsController.cs" />
+    <Compile Include="Controllers\airlinesController.cs" />
+    <Compile Include="Controllers\ConsecutiveController.cs" />
+    <Compile Include="Controllers\ConsecutiveAPIController.cs" />
+    <Compile Include="Controllers\countriesController.cs" />
+    <Compile Include="Controllers\flightsController.cs" />
+    <Compile Include="Controllers\GatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LogBooksController.cs" />
-    <Compile Include="Controllers\ReservationsController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\TransactionsController.cs" />
-    <Compile Include="Controllers\UserCardsController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -325,9 +323,41 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Consecutive\Create.cshtml" />
+    <Content Include="Views\Consecutive\Delete.cshtml" />
+    <Content Include="Views\Consecutive\Details.cshtml" />
+    <Content Include="Views\Consecutive\Edit.cshtml" />
+    <Content Include="Views\Consecutive\Index.cshtml" />
+    <Content Include="Views\Gates\Create.cshtml" />
+    <Content Include="Views\Gates\Delete.cshtml" />
+    <Content Include="Views\Gates\Details.cshtml" />
+    <Content Include="Views\Gates\Edit.cshtml" />
+    <Content Include="Views\Gates\Index.cshtml" />
+    <Content Include="Views\airlines\Create.cshtml" />
+    <Content Include="Views\airlines\Delete.cshtml" />
+    <Content Include="Views\airlines\Details.cshtml" />
+    <Content Include="Views\airlines\Edit.cshtml" />
+    <Content Include="Views\airlines\Index.cshtml" />
+    <Content Include="Views\countries\Create.cshtml" />
+    <Content Include="Views\countries\Delete.cshtml" />
+    <Content Include="Views\countries\Details.cshtml" />
+    <Content Include="Views\countries\Edit.cshtml" />
+    <Content Include="Views\countries\Index.cshtml" />
+    <Content Include="Views\flights\Create.cshtml" />
+    <Content Include="Views\flights\Delete.cshtml" />
+    <Content Include="Views\flights\Details.cshtml" />
+    <Content Include="Views\flights\Edit.cshtml" />
+    <Content Include="Views\flights\Index.cshtml" />
+    <Content Include="Views\Home\Console.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

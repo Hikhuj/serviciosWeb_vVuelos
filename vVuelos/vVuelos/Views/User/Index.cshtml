@@ -1,0 +1,105 @@
+﻿@model IEnumerable<vVuelos.Models.user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.old_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.new_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.first_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.middle_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.last_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.second_last_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cards)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.security_question1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.answer1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.country.name1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.role.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.old_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.new_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.first_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.middle_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.last_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.second_last_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cards)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.security_question1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.answer1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country.name1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
