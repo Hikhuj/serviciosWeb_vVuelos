@@ -13,5 +13,10 @@ namespace vVuelos.Controllers
         {
             return View();
         }
+
+        public ActionResult Console()
+        {
+            return View();
+        }
     }
 }

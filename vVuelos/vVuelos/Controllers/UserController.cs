@@ -94,9 +94,24 @@ namespace vVuelos.Controllers
             return View(user);
         }
 
-        public ActionResult PassswordChange() {
+        public ActionResult ChangePassword(int? id) {
 
-            return RedirectToAction("Index");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            user user = db.users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
+            ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
+            return View(user);
+        }
+
+        public ActionResult Register() {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

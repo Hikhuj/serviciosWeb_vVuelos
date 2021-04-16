@@ -3,5 +3,35 @@
     ViewBag.Title = "Console";
 }
 
-<h2>Console</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("User management", "Index", "User", new { area = "" }, null)</h3>
+    </div>
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("Consecutivos", "Index", "Consecutive", new { area = "" }, null)</h3>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("Puertas", "Index", "Gates", new { area = "" }, null)</h3>
+
+    </div>
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("Aerolineas", "Index", "airlines", new { area = "" }, null)</h3>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("Paises", "Index", "countries", new { area = "" }, null)</h3>
+        
+    </div>
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("Vuelos", "Index", "flights", new { area = "" }, null)</h3>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-sm-4">
+        <h3>@Html.ActionLink("Consultas", "Index", "User", new { area = "" }, null)</h3>
+    </div>
+    <div class="col-sm-4">
+        <h3>Bitacora</h3>
+    </div>
+</div>
 

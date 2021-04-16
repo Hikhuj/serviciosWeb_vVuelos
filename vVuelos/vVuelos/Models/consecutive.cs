@@ -11,8 +11,7 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class consecutive
     {
         public int id { get; set; }
@@ -20,7 +19,6 @@ namespace vVuelos.Models
         public int value { get; set; }
         public string prefix { get; set; }
         public Nullable<int> range_int { get; set; }
-        
         public Nullable<int> range_out { get; set; }
     }
 }

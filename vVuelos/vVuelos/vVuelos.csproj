@@ -168,24 +168,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Classes\AirlineData.cs" />
-    <Compile Include="Classes\Airport_gate.cs" />
-    <Compile Include="Classes\CardData.cs" />
-    <Compile Include="Classes\CityData.cs" />
-    <Compile Include="Classes\ConsecutiveData.cs" />
-    <Compile Include="Classes\CountryData.cs" />
-    <Compile Include="Classes\CountryCityData.cs" />
-    <Compile Include="Classes\ErrorData.cs" />
-    <Compile Include="Classes\FlightData.cs" />
-    <Compile Include="Classes\FlightTicketData.cs" />
-    <Compile Include="Classes\LogBookData.cs" />
-    <Compile Include="Classes\NumberValidation.cs" />
-    <Compile Include="Classes\ReservationData.cs" />
-    <Compile Include="Classes\RolData.cs" />
-    <Compile Include="Classes\TransactionData.cs" />
-    <Compile Include="Classes\UserData.cs" />
-    <Compile Include="Classes\UserCardData.cs" />
+    <Compile Include="Classes\EventHandler.cs" />
     <Compile Include="Controllers\airlinesController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\ConsecutiveController.cs" />
     <Compile Include="Controllers\ConsecutiveAPIController.cs" />
     <Compile Include="Controllers\countriesController.cs" />
@@ -324,7 +310,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
@@ -339,12 +324,10 @@
     <Content Include="Views\Gates\Edit.cshtml" />
     <Content Include="Views\Gates\Index.cshtml" />
     <Content Include="Views\airlines\Create.cshtml" />
-    <Content Include="Views\airlines\Delete.cshtml" />
     <Content Include="Views\airlines\Details.cshtml" />
     <Content Include="Views\airlines\Edit.cshtml" />
     <Content Include="Views\airlines\Index.cshtml" />
     <Content Include="Views\countries\Create.cshtml" />
-    <Content Include="Views\countries\Delete.cshtml" />
     <Content Include="Views\countries\Details.cshtml" />
     <Content Include="Views\countries\Edit.cshtml" />
     <Content Include="Views\countries\Index.cshtml" />
@@ -354,6 +337,13 @@
     <Content Include="Views\flights\Edit.cshtml" />
     <Content Include="Views\flights\Index.cshtml" />
     <Content Include="Views\Home\Console.cshtml" />
+    <Content Include="Views\Cities\Create.cshtml" />
+    <Content Include="Views\Cities\Details.cshtml" />
+    <Content Include="Views\Cities\Edit.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
