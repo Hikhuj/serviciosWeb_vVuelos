@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="vVuelos_paymentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cards">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="card_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="expiration_month" Type="int" Nullable="false" />
+          <Property Name="expiration_year" Type="int" Nullable="false" />
+          <Property Name="cvv" Type="int" Nullable="false" />
+          <Property Name="issuer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="is_credit_card" Type="int" />
+          <Property Name="is_debit_card" Type="int" />
+          <Property Name="credit_limit" Type="int" />
+          <Property Name="balance" Type="int" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="easy_pay_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'vVuelos_payment.dbo.customer_cards' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="customer_cards">
+          <Key>
+            <PropertyRef Name="user_id_FK" />
+            <PropertyRef Name="card_id_FK" />
+          </Key>
+          <Property Name="user_id_FK" Type="int" Nullable="false" />
+          <Property Name="card_id_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="easy_pay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="security_code" Type="int" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="current_amount" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_customer_cards_cards">
+          <End Role="cards" Type="Self.cards" Multiplicity="1" />
+          <End Role="customer_cards" Type="Self.customer_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cards">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer_cards">
+              <PropertyRef Name="card_id_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_cards_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="customer_cards" Type="Self.customer_cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="customer_cards">
+              <PropertyRef Name="user_id_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_easy_pay">
+          <End Role="easy_pay" Type="Self.easy_pay" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="easy_pay">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="easy_pay_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vVuelos_paymentModelStoreContainer">
+          <EntitySet Name="cards" EntityType="Self.cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="easy_pay" EntityType="Self.easy_pay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer_cards" EntityType="Self.customer_cards" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [customer_cards].[user_id_FK] AS [user_id_FK], 
+    [customer_cards].[card_id_FK] AS [card_id_FK]
+    FROM [dbo].[customer_cards] AS [customer_cards]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_customer_cards_cards" Association="Self.FK_customer_cards_cards">
+            <End Role="cards" EntitySet="cards" />
+            <End Role="customer_cards" EntitySet="customer_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_cards_customer" Association="Self.FK_customer_cards_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="customer_cards" EntitySet="customer_cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_easy_pay" Association="Self.FK_customer_easy_pay">
+            <End Role="easy_pay" EntitySet="easy_pay" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="vVuelos_paymentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cards">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="card_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="expiration_month" Type="Int32" Nullable="false" />
+          <Property Name="expiration_year" Type="Int32" Nullable="false" />
+          <Property Name="cvv" Type="Int32" Nullable="false" />
+          <Property Name="issuer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_credit_card" Type="Int32" />
+          <Property Name="is_debit_card" Type="Int32" />
+          <Property Name="credit_limit" Type="Int32" />
+          <Property Name="balance" Type="Int32" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.customer_cards" FromRole="cards" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="easy_pay_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="easy_pay" Relationship="Self.FK_customer_easy_pay" FromRole="customer" ToRole="easy_pay" />
+          <NavigationProperty Name="cards" Relationship="Self.customer_cards" FromRole="customer" ToRole="cards" />
+        </EntityType>
+        <EntityType Name="easy_pay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="security_code" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="current_amount" Type="Double" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_customer_easy_pay" FromRole="easy_pay" ToRole="customer" />
+        </EntityType>
+        <Association Name="FK_customer_easy_pay">
+          <End Role="easy_pay" Type="Self.easy_pay" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="easy_pay">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="easy_pay_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customer_cards">
+          <End Role="cards" Type="Self.cards" Multiplicity="*" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="vVuelos_paymentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cards" EntityType="Self.cards" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="easy_pay" EntityType="Self.easy_pay" />
+          <AssociationSet Name="FK_customer_easy_pay" Association="Self.FK_customer_easy_pay">
+            <End Role="easy_pay" EntitySet="easy_pay" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="customer_cards" Association="Self.customer_cards">
+            <End Role="cards" EntitySet="cards" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="vVuelos_paymentModelStoreContainer" CdmEntityContainer="vVuelos_paymentEntities">
+          <EntitySetMapping Name="cards">
+            <EntityTypeMapping TypeName="vVuelos_paymentModel.cards">
+              <MappingFragment StoreEntitySet="cards">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="expiration_month" ColumnName="expiration_month" />
+                <ScalarProperty Name="expiration_year" ColumnName="expiration_year" />
+                <ScalarProperty Name="cvv" ColumnName="cvv" />
+                <ScalarProperty Name="issuer" ColumnName="issuer" />
+                <ScalarProperty Name="is_credit_card" ColumnName="is_credit_card" />
+                <ScalarProperty Name="is_debit_card" ColumnName="is_debit_card" />
+                <ScalarProperty Name="credit_limit" ColumnName="credit_limit" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="vVuelos_paymentModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="easy_pay_id" ColumnName="easy_pay_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="easy_pay">
+            <EntityTypeMapping TypeName="vVuelos_paymentModel.easy_pay">
+              <MappingFragment StoreEntitySet="easy_pay">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="security_code" ColumnName="security_code" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="current_amount" ColumnName="current_amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="customer_cards" TypeName="vVuelos_paymentModel.customer_cards" StoreEntitySet="customer_cards">
+            <EndProperty Name="cards">
+              <ScalarProperty Name="id" ColumnName="card_id_FK" />
+            </EndProperty>
+            <EndProperty Name="customer">
+              <ScalarProperty Name="user_id" ColumnName="user_id_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
