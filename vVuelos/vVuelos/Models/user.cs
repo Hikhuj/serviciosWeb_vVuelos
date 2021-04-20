@@ -32,7 +32,6 @@ namespace vVuelos.Models
         public string last_name { get; set; }
         public string second_last_name { get; set; }
         public int rol_id_FK { get; set; }
-        public string cards { get; set; }
         public string consecutive_country_id { get; set; }
         public string security_question1 { get; set; }
         public string answer1 { get; set; }

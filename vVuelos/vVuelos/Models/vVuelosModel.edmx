@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="vVuelosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="vVuelosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="airlines">
           <Key>
             <PropertyRef Name="consecutive_airline_id" />
@@ -13,6 +13,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="consecutive_country_id_FK" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="image" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="airport_gates">
           <Key>
@@ -75,8 +76,8 @@ warning 6002: The table/view 'vVuelos.dbo.countries_cities' does not have a prim
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="timestamp" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="flight_tickets">
@@ -163,7 +164,6 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="second_last_name" Type="nvarchar" MaxLength="50" />
           <Property Name="rol_id_FK" Type="int" Nullable="false" />
-          <Property Name="cards" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="consecutive_country_id" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="security_question1" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="answer1" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -324,6 +324,106 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_add_airline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="COUNTRY" Type="nvarchar" Mode="In" />
+          <Parameter Name="IMAGE" Type="text" Mode="In" />
+          <Parameter Name="STATUS" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_add_country" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="IMAGE" Type="text" Mode="In" />
+        </Function>
+        <Function Name="sp_add_fligths" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="AIRLINE_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="CITY_ID" Type="int" Mode="In" />
+          <Parameter Name="ARRIVAL_DATE" Type="date" Mode="In" />
+          <Parameter Name="ARRIVAL_TIME" Type="time" Mode="In" />
+          <Parameter Name="AIRPORT_GATE_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="STATUS" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_add_gates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NUMBER" Type="int" Mode="In" />
+          <Parameter Name="STATUS" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_add_reservations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="BOOKING_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="AMOUNT" Type="int" Mode="In" />
+          <Parameter Name="TOTAL" Type="int" Mode="In" />
+          <Parameter Name="ALERT" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_add_tickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="CONSECUTIVE_COUNTRY" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_add_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_add_wallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_change_pw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_create_consecutive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DESCRIPTION" Type="nvarchar" Mode="In" />
+          <Parameter Name="VALUE" Type="int" Mode="In" />
+          <Parameter Name="PREFIX" Type="nvarchar" Mode="In" />
+          <Parameter Name="RANGEINT" Type="int" Mode="In" />
+          <Parameter Name="RANGEOUT" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_login_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_remove_wallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_update_airline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="COUNTRY" Type="nvarchar" Mode="In" />
+          <Parameter Name="IMAGE" Type="text" Mode="In" />
+          <Parameter Name="STATUS" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_update_consecutive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="DESCRIPTION" Type="nvarchar" Mode="In" />
+          <Parameter Name="VALUE" Type="int" Mode="In" />
+          <Parameter Name="PREFIX" Type="nvarchar" Mode="In" />
+          <Parameter Name="RANGEINT" Type="int" Mode="In" />
+          <Parameter Name="RANGEOUT" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_update_country" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CONSECUTIVE_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="IMAGE" Type="text" Mode="In" />
+        </Function>
+        <Function Name="sp_update_gate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="NUMBER" Type="int" Mode="In" />
+          <Parameter Name="STATUS" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_update_password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="old_password" Type="nvarchar" Mode="In" />
+          <Parameter Name="new_password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_update_reservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="BOOKING_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="AMOUNT" Type="int" Mode="In" />
+          <Parameter Name="TOTAL" Type="int" Mode="In" />
+          <Parameter Name="ALERT" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_update_tickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="CONSECUTIVE_COUNTRY" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_update_user_information" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="firstname" Type="nvarchar" Mode="In" />
+          <Parameter Name="middle" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="secondlast" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_update_wallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetErrorInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="vVuelosModelStoreContainer">
           <EntitySet Name="airlines" EntityType="Self.airlines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="airport_gates" EntityType="Self.airport_gates" Schema="dbo" store:Type="Tables" />
@@ -404,8 +504,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             <End Role="users" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vVuelosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -419,6 +518,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="country" Relationship="Self.FK_airlines_countries" FromRole="airlines" ToRole="countries" />
           <NavigationProperty Name="flights" Relationship="Self.FK_flights_airlines" FromRole="airlines" ToRole="flights" />
+          <Property Name="status" Type="Boolean" />
         </EntityType>
         <EntityType Name="airport_gates">
           <Key>
@@ -479,8 +579,8 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="flight_tickets">
@@ -564,7 +664,6 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rol_id_FK" Type="Int32" Nullable="false" />
-          <Property Name="cards" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="consecutive_country_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="security_question1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="answer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -749,6 +848,106 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             <End Role="cards" EntitySet="cards" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
+          <FunctionImport Name="sp_add_airline">
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="COUNTRY" Mode="In" Type="String" />
+            <Parameter Name="IMAGE" Mode="In" Type="String" />
+            <Parameter Name="STATUS" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_country">
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="IMAGE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_fligths">
+            <Parameter Name="CODE" Mode="In" Type="String" />
+            <Parameter Name="AIRLINE_ID" Mode="In" Type="String" />
+            <Parameter Name="CITY_ID" Mode="In" Type="Int32" />
+            <Parameter Name="ARRIVAL_DATE" Mode="In" Type="DateTime" />
+            <Parameter Name="ARRIVAL_TIME" Mode="In" Type="Time" />
+            <Parameter Name="AIRPORT_GATE_ID" Mode="In" Type="String" />
+            <Parameter Name="STATUS" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_gates">
+            <Parameter Name="NUMBER" Mode="In" Type="Int32" />
+            <Parameter Name="STATUS" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_reservations">
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="BOOKING_ID" Mode="In" Type="String" />
+            <Parameter Name="AMOUNT" Mode="In" Type="Int32" />
+            <Parameter Name="TOTAL" Mode="In" Type="Int32" />
+            <Parameter Name="ALERT" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_tickets">
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="CONSECUTIVE_COUNTRY" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_add_user" />
+          <FunctionImport Name="sp_add_wallet" />
+          <FunctionImport Name="sp_change_pw" />
+          <FunctionImport Name="sp_create_consecutive">
+            <Parameter Name="DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="VALUE" Mode="In" Type="Int32" />
+            <Parameter Name="PREFIX" Mode="In" Type="String" />
+            <Parameter Name="RANGEINT" Mode="In" Type="Int32" />
+            <Parameter Name="RANGEOUT" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_login_user" />
+          <FunctionImport Name="sp_remove_wallet" />
+          <FunctionImport Name="sp_update_airline">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="COUNTRY" Mode="In" Type="String" />
+            <Parameter Name="IMAGE" Mode="In" Type="String" />
+            <Parameter Name="STATUS" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_consecutive">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="DESCRIPTION" Mode="In" Type="String" />
+            <Parameter Name="VALUE" Mode="In" Type="Int32" />
+            <Parameter Name="PREFIX" Mode="In" Type="String" />
+            <Parameter Name="RANGEINT" Mode="In" Type="Int32" />
+            <Parameter Name="RANGEOUT" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_country">
+            <Parameter Name="CONSECUTIVE_ID" Mode="In" Type="String" />
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="IMAGE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_gate">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="NUMBER" Mode="In" Type="Int32" />
+            <Parameter Name="STATUS" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_password">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="old_password" Mode="In" Type="String" />
+            <Parameter Name="new_password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_reservation">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="BOOKING_ID" Mode="In" Type="String" />
+            <Parameter Name="AMOUNT" Mode="In" Type="Int32" />
+            <Parameter Name="TOTAL" Mode="In" Type="Int32" />
+            <Parameter Name="ALERT" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_tickets">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="CONSECUTIVE_COUNTRY" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_user_information">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="firstname" Mode="In" Type="String" />
+            <Parameter Name="middle" Mode="In" Type="String" />
+            <Parameter Name="lastname" Mode="In" Type="String" />
+            <Parameter Name="secondlast" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_update_wallet" />
+          <FunctionImport Name="usp_GetErrorInfo" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -759,6 +958,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <EntitySetMapping Name="airlines">
             <EntityTypeMapping TypeName="vVuelosModel.airline">
               <MappingFragment StoreEntitySet="airlines">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="consecutive_airline_id" ColumnName="consecutive_airline_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="consecutive_country_id_FK" ColumnName="consecutive_country_id_FK" />
@@ -906,7 +1106,6 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
                 <ScalarProperty Name="rol_id_FK" ColumnName="rol_id_FK" />
-                <ScalarProperty Name="cards" ColumnName="cards" />
                 <ScalarProperty Name="consecutive_country_id" ColumnName="consecutive_country_id" />
                 <ScalarProperty Name="security_question1" ColumnName="security_question1" />
                 <ScalarProperty Name="answer1" ColumnName="answer1" />
@@ -929,6 +1128,28 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
               <ScalarProperty Name="id" ColumnName="user_id_FK" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_add_airline" FunctionName="vVuelosModel.Store.sp_add_airline" />
+          <FunctionImportMapping FunctionImportName="sp_add_country" FunctionName="vVuelosModel.Store.sp_add_country" />
+          <FunctionImportMapping FunctionImportName="sp_add_fligths" FunctionName="vVuelosModel.Store.sp_add_fligths" />
+          <FunctionImportMapping FunctionImportName="sp_add_gates" FunctionName="vVuelosModel.Store.sp_add_gates" />
+          <FunctionImportMapping FunctionImportName="sp_add_reservations" FunctionName="vVuelosModel.Store.sp_add_reservations" />
+          <FunctionImportMapping FunctionImportName="sp_add_tickets" FunctionName="vVuelosModel.Store.sp_add_tickets" />
+          <FunctionImportMapping FunctionImportName="sp_add_user" FunctionName="vVuelosModel.Store.sp_add_user" />
+          <FunctionImportMapping FunctionImportName="sp_add_wallet" FunctionName="vVuelosModel.Store.sp_add_wallet" />
+          <FunctionImportMapping FunctionImportName="sp_change_pw" FunctionName="vVuelosModel.Store.sp_change_pw" />
+          <FunctionImportMapping FunctionImportName="sp_create_consecutive" FunctionName="vVuelosModel.Store.sp_create_consecutive" />
+          <FunctionImportMapping FunctionImportName="sp_login_user" FunctionName="vVuelosModel.Store.sp_login_user" />
+          <FunctionImportMapping FunctionImportName="sp_remove_wallet" FunctionName="vVuelosModel.Store.sp_remove_wallet" />
+          <FunctionImportMapping FunctionImportName="sp_update_airline" FunctionName="vVuelosModel.Store.sp_update_airline" />
+          <FunctionImportMapping FunctionImportName="sp_update_consecutive" FunctionName="vVuelosModel.Store.sp_update_consecutive" />
+          <FunctionImportMapping FunctionImportName="sp_update_country" FunctionName="vVuelosModel.Store.sp_update_country" />
+          <FunctionImportMapping FunctionImportName="sp_update_gate" FunctionName="vVuelosModel.Store.sp_update_gate" />
+          <FunctionImportMapping FunctionImportName="sp_update_password" FunctionName="vVuelosModel.Store.sp_update_password" />
+          <FunctionImportMapping FunctionImportName="sp_update_reservation" FunctionName="vVuelosModel.Store.sp_update_reservation" />
+          <FunctionImportMapping FunctionImportName="sp_update_tickets" FunctionName="vVuelosModel.Store.sp_update_tickets" />
+          <FunctionImportMapping FunctionImportName="sp_update_user_information" FunctionName="vVuelosModel.Store.sp_update_user_information" />
+          <FunctionImportMapping FunctionImportName="sp_update_wallet" FunctionName="vVuelosModel.Store.sp_update_wallet" />
+          <FunctionImportMapping FunctionImportName="usp_GetErrorInfo" FunctionName="vVuelosModel.Store.usp_GetErrorInfo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

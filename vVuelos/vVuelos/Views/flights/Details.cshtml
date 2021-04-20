@@ -1,0 +1,74 @@
+﻿@model vVuelos.Models.flight
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.arrival_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.arrival_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.arrival_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.arrival_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.airline.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.airline.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.airport_gates.consecutive_airport_gate_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.airport_gates.consecutive_airport_gate_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.consecutive_flight_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<vVuelos.Models.airline>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.country.name1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country.name1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.consecutive_airline_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.consecutive_airline_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.consecutive_airline_id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -24,6 +24,7 @@ namespace vVuelos.Models
         public string name { get; set; }
         public string consecutive_country_id_FK { get; set; }
         public string image { get; set; }
+        public Nullable<bool> status { get; set; }
     
         public virtual country country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

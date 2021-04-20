@@ -1,39 +1,102 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
+using System.Web.Mvc;
+using vVuelos.Models;
 
 namespace vVuelos.Controllers
 {
-    public class CitiesController : ApiController
+    public class CitiesController : Controller
     {
-        // GET: api/Cities
-        public IEnumerable<string> Get()
+        private vVuelosEntities db = new vVuelosEntities();
+
+        // GET: Cities
+        public ActionResult Index()
         {
-            return new string[] { "value1", "value2" };
+            return View(db.cities.ToList());
         }
 
-        // GET: api/Cities/5
-        public string Get(int id)
+        // GET: Cities/Details/5
+        public ActionResult Details(int? id)
         {
-            return "value";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            city city = db.cities.Find(id);
+            if (city == null)
+            {
+                return HttpNotFound();
+            }
+            return View(city);
         }
 
-        // POST: api/Cities
-        public void Post([FromBody]string value)
+        // GET: Cities/Create
+        public ActionResult Create()
         {
+            ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1");
+            return View();
         }
 
-        // PUT: api/Cities/5
-        public void Put(int id, [FromBody]string value)
+        // POST: Cities/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id,name,consecutive_country_id_FK")] city city)
         {
+            if (ModelState.IsValid)
+            {
+                db.cities.Add(city);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(city);
         }
 
-        // DELETE: api/Cities/5
-        public void Delete(int id)
+        // GET: Cities/Edit/5
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            city city = db.cities.Find(id);
+            if (city == null)
+            {
+                return HttpNotFound();
+            }
+            return View(city);
+        }
+
+        // POST: Cities/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,name,consecutive_country_id_FK")] city city)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(city).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(city);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

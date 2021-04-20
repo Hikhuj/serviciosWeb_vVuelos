@@ -1,0 +1,69 @@
+﻿@model IEnumerable<vVuelos.Models.flight>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.arrival_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.arrival_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.airline.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.airport_gates.consecutive_airport_gate_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.arrival_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.arrival_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.airline.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.airport_gates.consecutive_airport_gate_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.consecutive_flight_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.consecutive_flight_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.consecutive_flight_id })
+        </td>
+    </tr>
+}
+
+</table>
