@@ -16,7 +16,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+       <label class = "control-label col-md-2">Descripcion</label>
         <div class="col-md-10">
             <select class="btn btn-secondary btn-lg dropdown-toggle" name="description" id="description">
                 <option class="controls" value="Paises">Paises</option>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.value, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Consecutivo</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.value, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.value, "", new { @class = "text-danger" })
@@ -42,7 +42,7 @@
         <input type="checkbox" class="checkbox" onchange="enablePrefix()" id="hasprefix"/>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.prefix, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Prefijo</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.prefix, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
             @Html.ValidationMessageFor(model => model.prefix, "", new { @class = "text-danger" })
@@ -53,7 +53,7 @@
         <input type="checkbox" class="checkbox" onchange="enableRange()" id="hasrange"/>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.range_int, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Rango inicial</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.range_int, new { htmlAttributes = new { @class = "form-control", @disabled="true"} })
             @Html.ValidationMessageFor(model => model.range_int, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.range_out, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Rango Final</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.range_out, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
             @Html.ValidationMessageFor(model => model.range_out, "", new { @class = "text-danger" })

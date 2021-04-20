@@ -178,6 +178,7 @@
     <Compile Include="Controllers\flightsController.cs" />
     <Compile Include="Controllers\GatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -344,6 +345,13 @@
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\UpdateInformation.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

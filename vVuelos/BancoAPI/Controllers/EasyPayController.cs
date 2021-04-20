@@ -7,33 +7,32 @@ using System.Web.Http;
 
 namespace BancoAPI.Controllers
 {
-    public class ValuesController : ApiController
+    public class EasyPayController : ApiController
     {
-        // GET api/values
+        // GET: api/EasyPay
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET: api/EasyPay/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
-        public void Post([FromBody] string num_cuenta,string num_tar)
+        // POST: api/EasyPay
+        public void Post([FromBody]string num_cuenta, int cod_seg, string password)
         {
-
+            
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/EasyPay/5
+        public void Put(int id, [FromBody]string value)
         {
-
         }
 
-        // DELETE api/values/5
+        // DELETE: api/EasyPay/5
         public void Delete(int id)
         {
         }

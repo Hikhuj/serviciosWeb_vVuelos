@@ -24,24 +24,24 @@ namespace vVuelos.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string passwordHash)
+        public ActionResult Login(string username, string new_password)
         {
 
-            if (username != null && passwordHash != null)
+            if (username != null && new_password != null)
             {
                 user currentUser = db.users.Where(m => m.username == username).FirstOrDefault();
-                if (currentUser != null && currentUser.username == username && currentUser.new_password.Equals(passwordHash))
+                if (currentUser != null && currentUser.username == username && currentUser.new_password.Equals(new_password))
                 {
                     //creating authentication ticket (will go insde the cookie)
                     var authTicket = new FormsAuthenticationTicket(
                           1,
-                          currentUser.username,  //user id
+                          currentUser.id.ToString(),  //user id
                           DateTime.Now,
                           DateTime.Now.AddMinutes(15),  // expiry after 15 minutes of not using the system
                           false,  //true to remember -> REMEMBER ME OPTION
                           "", //roles 
                           "/"
-                        );
+                        ) ;
                     //encrypt the ticket and add it to a cookie
                     HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
                     Response.Cookies.Add(cookie);
