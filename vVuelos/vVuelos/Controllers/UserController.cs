@@ -21,6 +21,22 @@ namespace vVuelos.Controllers
             return View(users.ToList());
         }
 
+        public ActionResult PersonalUser(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            user user = db.users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
+            ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
+            return View(user);
+        }
+
         // GET: User/Details/5
         public ActionResult Details(int? id)
         {

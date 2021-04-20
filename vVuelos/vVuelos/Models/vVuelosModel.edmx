@@ -164,7 +164,6 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="second_last_name" Type="nvarchar" MaxLength="50" />
           <Property Name="rol_id_FK" Type="int" Nullable="false" />
-          <Property Name="cards" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="consecutive_country_id" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="security_question1" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="answer1" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -665,7 +664,6 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rol_id_FK" Type="Int32" Nullable="false" />
-          <Property Name="cards" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="consecutive_country_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="security_question1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="answer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1108,7 +1106,6 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
                 <ScalarProperty Name="rol_id_FK" ColumnName="rol_id_FK" />
-                <ScalarProperty Name="cards" ColumnName="cards" />
                 <ScalarProperty Name="consecutive_country_id" ColumnName="consecutive_country_id" />
                 <ScalarProperty Name="security_question1" ColumnName="security_question1" />
                 <ScalarProperty Name="answer1" ColumnName="answer1" />
