@@ -1,57 +1,63 @@
 ﻿@model vVuelos.Models.user
-@{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
+@{ ViewBag.Title = "Ingresar";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="~/Scripts/floatingMenu.js"></script>
+<script src="~/Scripts/js/AdminUtils.js"></script>
+
+<link href="~/Content/customStylesheet.css" rel="stylesheet" type="text/css" />
+<!--
 <script type="text/javascript">
 
     $(document).ready(function () {
         $('#alert-login-message').delay(5000).fadeOut();
     });
 </script>
+    -->
+
 
 <center>
-    <div class="container">
+    <section class="form-register">
         <div class="row">
             <br />
             @using (Html.BeginForm("Login", "Auth", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-signin" }))
             {
                 <!-- Form Header -->
-                <h2 class="form-signin-heading">
-                    Iniciar sesión
-                </h2>
+                <h2 class="form-signin-heading">Iniciar sesión</h2>
                 <br />
 
                 <!-- Form Username -->
-                @Html.TextBoxFor(m => m.username, new { @class = "form-control", name = "username", placeHolder = "username", autofocus = "" })
+                @Html.TextBoxFor(m => m.username, new { @class = "form-control", name = "username", placeHolder = "Usuario", autofocus = "" })
                 <br />
 
                 <!-- Form Password -->
-                @Html.PasswordFor(m => m.new_password, new { @class = "form-control", name = "password", placeHolder = "password", autofocus = "" })
+                @Html.PasswordFor(m => m.new_password, new { @class = "form-control", name = "password", placeHolder = "Contraseña", autofocus = "" })
                 <br />
-
+                
                 <!-- Form Button - Iniciar -->
-                <button class="btn btn-primary" type="submit">Iniciar</button>
+                <button class="buttons" type="submit" id="btnCrearUsuario">Iniciar</button>
 
                 <!-- Form Button - Registrarse -->
-                <button class="btn ">
-                    @Html.ActionLink("Registrarse", "Register", "User", null, new { @style = "color:Gray;" })
+                <button class="buttons">
+                    @Html.ActionLink("Registrarse", "Register", "User", null, new { @style = "color:White; text-decoration:none" })
                 </button>
-
+    
                 <!-- Form Button - Validation -->
                 if (@ViewBag.error != null)
                 {
                     <br />
                     <br />
                     <br />
-                    <div id="alert-login-message" class="alert alert-danger col-sm-offset-4 col-sm-4"> @ViewBag.error </div>
+                    <div id="alert-login-message" class="alert alert-danger col-sm-offset-4 col-sm-4">
+                        @ViewBag.error
+                    </div>
                     <br />
                 }
 
             }
 
         </div>
-    </div>
+    </section>
 </center>

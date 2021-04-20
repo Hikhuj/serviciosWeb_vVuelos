@@ -6,33 +6,115 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="~/Scripts/floatingMenu.js"></script>
+    <script src="~/Scripts/js/AdminUtils.js"></script>
+    <link href="~/Content/customStylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Vvuelos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+    <heder>
+
+    </heder>
+
+    <div>
+        <div id="body_1">
+
+            <!-- BOTON DE MENU -->
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+            <!-- / BOTON DE MENU -->
+
+            <!-- SIDEBAR -->
+            <div class="side-bar">
+
+                <!-- MENU -->
+                <div class="menu">
+
+                    <!-- SEGURIDAD -->
+                    <div class="item">
+                        <a class="sub-btn"><i class=""></i>Seguridad<i class="fas fa-angle-right dropdown"></i></a>
+                        <div class="sub-menu">
+                            <a class="sub-btn"><i class=""></i>Usuarios<i class="fas fa-angle-right dropdown"></i></a>
+                            <div class="sub-menu">
+                                <a href="#" class="sub-item">Crear Usuarios</a>
+                                <a href="#" class="sub-item">Asignar Roles</a>
+                            </div>
+                            <a href="#" class="sub-item">Cambiar Contraseña</a>
+                        </div>
+                    </div>
+                    <!-- /SEGURIDAD -->
+
+                    <!-- ADMINISTRACION -->
+                    <div class="item">
+                        <a class="sub-btn"><i class=""></i>Administracion<i class="fas fa-angle-right dropdown"></i></a>
+                        <div class="sub-menu">
+                            <a href="#" class="sub-item">Consecutivos</a>
+                            <a href="#" class="sub-item">Paises</a>
+                            <a href="#" class="sub-item">Aerolineas</a>
+                            <a href="#" class="sub-item">Puertas del Aeropuerto</a>
+                        </div>
+                    </div>
+                    <!-- / ADMINISTRACION -->
+
+                    <!-- CONSULTAS -->
+                    <div class="item">
+                        <a class="sub-btn"><i class=""></i>Consultas<i class="fas fa-angle-right dropdown"></i></a>
+                        <div class="sub-menu">
+                            <a href="#" class="sub-item">Bitacora</a>
+                            <a href="#" class="sub-item">Errores</a>
+                            <a href="#" class="sub-item">Descargas</a>
+                            <a href="#" class="sub-item">Aerolineas</a>
+                            <a href="#" class="sub-item">Puertas</a>
+                        </div>
+                    </div>
+                    <!-- / CONSULTAS -->
+
+                    <!-- BOTON CERRAR MENU -->
+                    <div class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <!-- / BOTON CERRAR MENU -->
+
+                </div>
+                <!-- / MENU -->
             </div>
+            <!-- / SIDEBAR -->
+        </div>
+
+        <div id="body_2">
+            <!-- MVC Automatico -->
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Vvuelos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+                <hr />
+            </div>
+            <!-- / MVC Automatico -->
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
+    <footer>
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
