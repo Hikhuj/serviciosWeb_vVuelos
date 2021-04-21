@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,18 +47,20 @@ namespace vVuelos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "consecutive_country_id,name1,image")] country country)
+        public ActionResult Create( string name1, HttpPostedFileBase image)
         {
-            if (ModelState.IsValid)
-            {
-                db.sp_add_country(
+            country country = new country();
+            country.name1 = name1;
+            country.image = "~/img/Flags/" + image.FileName;
+            int affectedRows = db.sp_add_country(
                         country.name1,
-                        country.image
-                    );
-                db.SaveChanges();
+                        country.image);
+            if (affectedRows>0)
+            {
+                string path = Path.Combine(Server.MapPath("~/img/Flags/"), Path.GetFileName(image.FileName));
+                image.SaveAs(path);
                 return RedirectToAction("Index");
             }
-
             return View(country);
         }
 
@@ -81,12 +84,18 @@ namespace vVuelos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "consecutive_country_id,name1,image")] country country)
+        public ActionResult Edit(string consecutive_country_id, string name1, HttpPostedFileBase image, string currentImage)
         {
+            country country = new country();
+            country.consecutive_country_id = consecutive_country_id;
+            country.name1 = name1;
+            country.image = "~/img/Flags/" + image.FileName;
             if (ModelState.IsValid)
             {
                 db.Entry(country).State = EntityState.Modified;
                 db.SaveChanges();
+                string path = Path.Combine(Server.MapPath("~/img/Flags/"), Path.GetFileName(image.FileName));
+                image.SaveAs(path);
                 return RedirectToAction("Index");
             }
             return View(country);

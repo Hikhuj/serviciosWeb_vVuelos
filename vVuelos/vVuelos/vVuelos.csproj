@@ -168,6 +168,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Classes\Encryption.cs" />
     <Compile Include="Classes\EventHandler.cs" />
     <Compile Include="Controllers\airlinesController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
@@ -252,6 +253,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\Flags\Costa Rica.png" />
+    <Content Include="img\Flags\USA.jpg" />
     <Content Include="Models\vVuelosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>vVuelosModel.Context.cs</LastGenOutput>
@@ -296,6 +299,9 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\js\AdminUtils.js" />
+    <Content Include="Scripts\js\Flights.js" />
+    <Content Include="Scripts\js\UserValidations.js" />
+    <Content Include="Scripts\js\ValidacionesAdm.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -353,11 +359,12 @@
     <Content Include="Views\Reservations\Details.cshtml" />
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\flights\Arrivals.cshtml" />
+    <Content Include="Views\flights\Departures.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\Airline\" />
-    <Folder Include="img\Flags\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

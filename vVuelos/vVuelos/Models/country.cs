@@ -11,7 +11,8 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,12 @@ namespace vVuelos.Models
         }
     
         public string consecutive_country_id { get; set; }
+        [MinLength(1, ErrorMessage = "Debe ingresar un nombre")]
         public string name1 { get; set; }
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        [Required(ErrorMessage = "Debe insertar una imagen.")]
+        [MinLength(5, ErrorMessage = "Debe insertar una imagen.")]
         public string image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

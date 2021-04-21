@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,13 +49,19 @@ namespace vVuelos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "consecutive_airline_id,name,consecutive_country_id_FK,image,status")] airline airline)
+        public ActionResult Create(string name, string consecutive_country_id_FK,HttpPostedFileBase image, bool status)
         {
+            airline airline = new airline(name, consecutive_country_id_FK,"~/img/Airline/"+image.FileName,status);
             if (ModelState.IsValid)
             {
-                db.sp_add_airline(airline.name,airline.consecutive_country_id_FK,airline.image,airline.status);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                int affectedRows = db.sp_add_airline(airline.name,airline.consecutive_country_id_FK,airline.image,airline.status);
+                if (affectedRows > 0)
+                {
+                    string path = Path.Combine(Server.MapPath("~/img/Airline/"), Path.GetFileName(image.FileName));
+                    image.SaveAs(path);
+                    return RedirectToAction("Index");
+                }
+
             }
 
             ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);

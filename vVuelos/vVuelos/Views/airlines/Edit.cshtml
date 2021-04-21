@@ -4,21 +4,26 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editar aerolinea @Model.name</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "airlines", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>airline</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.consecutive_airline_id)
+        <div class="form-group">
+            <label class="control-label col-md-2">ID</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.consecutive_airline_id)
+            </div>
+        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nombre</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -26,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.consecutive_country_id_FK, "consecutive_country_id_FK", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Pais de origen</label>
             <div class="col-md-10">
                 @Html.DropDownList("consecutive_country_id_FK", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.consecutive_country_id_FK, "", new { @class = "text-danger" })
@@ -34,15 +39,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Logo</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                <img src="@Url.Content(Model.image)" width="128" height="60" />
                 @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Estado de vuelo</label>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.status)
@@ -54,14 +60,14 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Borrar" class="btn btn-warning" onclick="limpiarData()" />
+                <input type="button" value="Cancelar" class="btn btn-danger" onclick="document.location='../Index'" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script src="~/Scripts/js/ValidacionesAdm.js" type="text/javascript">
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

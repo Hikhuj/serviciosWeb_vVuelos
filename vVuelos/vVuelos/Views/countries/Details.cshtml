@@ -1,17 +1,23 @@
 ﻿@model vVuelos.Models.country
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de pais";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>country</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name1)
+            ID
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.consecutive_country_id)
+        </dd>
+        <dt>
+            Nombre
         </dt>
 
         <dd>
@@ -24,11 +30,12 @@
 
         <dd>
             @Html.DisplayFor(model => model.image)
+            <img src="@Model.image" width="128" height="60" />
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.consecutive_country_id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.consecutive_country_id }) |
+    @Html.ActionLink("Volver", "Index")
 </p>

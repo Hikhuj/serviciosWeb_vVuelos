@@ -11,7 +11,9 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class airline
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +21,27 @@ namespace vVuelos.Models
         {
             this.flights = new HashSet<flight>();
         }
-    
+
+        public airline(string name, string consecutive_country_id_FK, string image1, bool status)
+        {
+            this.name = name;
+            this.consecutive_country_id_FK = consecutive_country_id_FK;
+            this.status = status;
+        }
+
         public string consecutive_airline_id { get; set; }
+
+        [MinLength(1,ErrorMessage ="Debe ingresar un nombre")]
         public string name { get; set; }
         public string consecutive_country_id_FK { get; set; }
+
+        //Validation for image
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        [Required(ErrorMessage = "Debe insertar una imagen.")]
+        [MinLength(5, ErrorMessage = "Debe insertar una imagen.")]
         public string image { get; set; }
+
         public Nullable<bool> status { get; set; }
     
         public virtual country country { get; set; }

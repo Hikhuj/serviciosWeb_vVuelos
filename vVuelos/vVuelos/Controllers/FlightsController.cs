@@ -20,6 +20,19 @@ namespace vVuelos.Controllers
             var flights = db.flights.Include(f => f.airline).Include(f => f.airport_gates).Include(f => f.city);
             return View(flights.ToList());
         }
+        //GET: Arrivals
+        public ActionResult Arrivals()
+        {
+            var flights = db.flights.Include(f => f.airline).Include(f => f.airport_gates).Include(f => f.city);
+            return View(flights.ToList());
+        }
+
+        //GET: Departures
+        public ActionResult Departures()
+        {
+            var flights = db.flights.Include(f => f.airline).Include(f => f.airport_gates).Include(f => f.city);
+            return View(flights.ToList());
+        }
 
         // GET: flights/Details/5
         public ActionResult Details(string id)

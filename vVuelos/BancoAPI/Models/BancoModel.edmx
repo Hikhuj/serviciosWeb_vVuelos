@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="vVuelos_paymentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="vVuelos_paymentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cards">
           <Key>
             <PropertyRef Name="id" />
@@ -15,10 +15,10 @@
           <Property Name="expiration_year" Type="int" Nullable="false" />
           <Property Name="cvv" Type="int" Nullable="false" />
           <Property Name="issuer" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="is_credit_card" Type="int" />
-          <Property Name="is_debit_card" Type="int" />
+          <Property Name="is_credit_card" Type="bit" />
+          <Property Name="is_debit_card" Type="bit" />
           <Property Name="credit_limit" Type="int" />
-          <Property Name="balance" Type="int" />
+          <Property Name="balance" Type="decimal" Precision="18" Scale="0" />
           <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="customer">
@@ -108,8 +108,7 @@ warning 6002: The table/view 'vVuelos_payment.dbo.customer_cards' does not have 
             <End Role="customer" EntitySet="customer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="vVuelos_paymentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -123,10 +122,10 @@ warning 6002: The table/view 'vVuelos_payment.dbo.customer_cards' does not have 
           <Property Name="expiration_year" Type="Int32" Nullable="false" />
           <Property Name="cvv" Type="Int32" Nullable="false" />
           <Property Name="issuer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="is_credit_card" Type="Int32" />
-          <Property Name="is_debit_card" Type="Int32" />
+          <Property Name="is_credit_card" Type="Boolean" />
+          <Property Name="is_debit_card" Type="Boolean" />
           <Property Name="credit_limit" Type="Int32" />
-          <Property Name="balance" Type="Int32" />
+          <Property Name="balance" Type="Decimal" />
           <Property Name="active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="customer" Relationship="Self.customer_cards" FromRole="cards" ToRole="customer" />
         </EntityType>

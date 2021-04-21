@@ -1,30 +1,22 @@
 ﻿@model vVuelos.Models.country
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Agregar pais";
 }
 
-<h2>Create</h2>
+<h2>Agregar pais</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create","countries", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>country</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.consecutive_country_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.consecutive_country_id, new { htmlAttributes = new { @class="form-control"} })
-                @Html.ValidationMessageFor(model => model.consecutive_country_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nombre</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.name1, "", new { @class = "text-danger" })
@@ -34,14 +26,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
                 @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
+                <input type="button" value="Borrar" class="btn btn-warning" onclick="borrarData()" />
+                <input type="button" value="Cancelar" class="btn btn-danger" onclick="document.location='../Index'" />
             </div>
         </div>
     </div>
@@ -50,7 +43,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
+<script src="~/Scripts/js/ValidacionesAdm.js" type="text/javascript">
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

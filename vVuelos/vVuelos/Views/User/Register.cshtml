@@ -6,3 +6,24 @@
 
 <h2>Register</h2>
 
+<section class="form-register">
+    <h4>Registro</h4>
+    <input class="controls" type="text" name="usuario" id="username" placeholder="Ingrese su Usuario">
+    <input class="controls" type="email" name="correo" id="email" placeholder="Ingrese su e-mail">
+    <input class="controls" type="password" name="contraseña" id="new_password" placeholder="Ingrese su Contraseña">
+    <input class="controls" type="password" name="contraseña2" id="txtPassword2" placeholder="Confirme su Contraseña">
+    <input class="controls" type="text" name="nombre" id="first_name" placeholder="Ingrese su Nombre">
+    <input class="controls" type="text" name="segundoNombre" id="middle_name" placeholder="Ingrese su Segundo Nombre">
+    <input class="controls" type="text" name="apellido" id="last_name" placeholder="Ingrese su Apellido">
+    <input class="controls" type="text" name="apellido2" id="second_last_name" placeholder="Ingrese su Segundo Apellido">
+    <div class="col-md-10">
+        @Html.DropDownList("rol_id_FK", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.rol_id_FK, "", new { @class = "text-danger" })
+    </div>
+    <input class="controls" type="text" name="pregunta" id="security_question1" placeholder="Ingrese su Pregunta de Seguridad">
+    <input class="controls" type="text" name="respuesta" id="answer1" placeholder="Ingrese su Respuesta de Seguridad">
+
+
+    <input class="buttons" type="submit" id="btnCrearUsuario" value="Crear Usuario">
+    <input class="buttons" type="submit" id="btnCancelar" value="Cancelar">
+</section>

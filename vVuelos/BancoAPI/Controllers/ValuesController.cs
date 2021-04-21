@@ -22,9 +22,9 @@ namespace BancoAPI.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody] string num_cuenta,string num_tar)
+        public int Post([FromBody] string num_cuenta,string num_tar)
         {
-
+            return 1;
         }
 
         // PUT api/values/5

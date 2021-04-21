@@ -69,6 +69,7 @@ namespace vVuelos.Controllers
         }
 
         // GET: User/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,6 +108,8 @@ namespace vVuelos.Controllers
         public ActionResult ChangePassword() {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(string old_password, string new_password) {
             int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
@@ -139,7 +142,7 @@ namespace vVuelos.Controllers
             return View(currentUser);
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult UpdateInformation(string username, string email, string first_name, string middle_name, string last_name, string second_last_name) {
             int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);

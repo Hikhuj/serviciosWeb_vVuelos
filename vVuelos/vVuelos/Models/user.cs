@@ -11,7 +11,9 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class user
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,17 +25,29 @@ namespace vVuelos.Models
         }
     
         public int id { get; set; }
+        [MinLength(3,ErrorMessage ="El usuario debe tener al menos 3 caracteres")]
         public string username { get; set; }
+        [EmailAddress]
         public string email { get; set; }
+        [PasswordPropertyText]
+        [StringLength(16,MinimumLength = 8, ErrorMessage = "Contraseña debe tener entre 8 y 16 caracteres")]
         public string old_password { get; set; }
+        [PasswordPropertyText]
+        [StringLength(16, MinimumLength = 8,ErrorMessage = "Contraseña debe tener al menos 8 caracteres")]
         public string new_password { get; set; }
+
         public string first_name { get; set; }
+
         public string middle_name { get; set; }
+
         public string last_name { get; set; }
+
         public string second_last_name { get; set; }
         public int rol_id_FK { get; set; }
         public string consecutive_country_id { get; set; }
+
         public string security_question1 { get; set; }
+
         public string answer1 { get; set; }
     
         public virtual country country { get; set; }

@@ -14,22 +14,36 @@ namespace BancoAPI.Models
     
     public partial class cards
     {
+        private int num_tarjeta;
+        private int mes_exp;
+        private int year_exp;
+        private string tipo;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cards()
         {
             this.customer = new HashSet<customer>();
         }
-    
+
+        public cards(string card_number, int expiration_month, int expiration_year, int cvv, string issuer) {
+            this.card_number = card_number;
+            this.expiration_month = expiration_month;
+            this.expiration_year = expiration_year;
+            this.cvv = cvv;
+            this.issuer = issuer;
+        
+        }
+
         public int id { get; set; }
         public string card_number { get; set; }
         public int expiration_month { get; set; }
         public int expiration_year { get; set; }
         public int cvv { get; set; }
         public string issuer { get; set; }
-        public Nullable<int> is_credit_card { get; set; }
-        public Nullable<int> is_debit_card { get; set; }
+        public bool is_credit_card { get; set; }
+        public bool is_debit_card { get; set; }
         public Nullable<int> credit_limit { get; set; }
-        public Nullable<int> balance { get; set; }
+        public decimal balance { get; set; }
         public bool active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
