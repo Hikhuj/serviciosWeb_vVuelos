@@ -164,7 +164,7 @@ namespace vVuelos.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_tickets", uSERIDParameter, cONSECUTIVE_COUNTRYParameter);
         }
     
-        public virtual int sp_add_user(string uSERNAME, string eMAIL, string pASSWORD, string nAME, string mIDDLE_NAME, string lAST_NAME, string sECOND_LAST, string sECURITY_Q, Nullable<int> cOUNTRY, string aNSWER)
+        public virtual int sp_add_user(string uSERNAME, string eMAIL, string pASSWORD, string nAME, string mIDDLE_NAME, string lAST_NAME, string sECOND_LAST, string sECURITY_Q, string cOUNTRY, string aNSWER)
         {
             var uSERNAMEParameter = uSERNAME != null ?
                 new ObjectParameter("USERNAME", uSERNAME) :
@@ -198,9 +198,9 @@ namespace vVuelos.Models
                 new ObjectParameter("SECURITY_Q", sECURITY_Q) :
                 new ObjectParameter("SECURITY_Q", typeof(string));
     
-            var cOUNTRYParameter = cOUNTRY.HasValue ?
+            var cOUNTRYParameter = cOUNTRY != null ?
                 new ObjectParameter("COUNTRY", cOUNTRY) :
-                new ObjectParameter("COUNTRY", typeof(int));
+                new ObjectParameter("COUNTRY", typeof(string));
     
             var aNSWERParameter = aNSWER != null ?
                 new ObjectParameter("ANSWER", aNSWER) :

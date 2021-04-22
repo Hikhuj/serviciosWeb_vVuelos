@@ -30,7 +30,6 @@ namespace vVuelos.Models
         }
 
         public string consecutive_airline_id { get; set; }
-        [Required(ErrorMessage ="Campo vacio")]
         public string name { get; set; }
         public string consecutive_country_id_FK { get; set; }
         [DataType(DataType.Upload)]

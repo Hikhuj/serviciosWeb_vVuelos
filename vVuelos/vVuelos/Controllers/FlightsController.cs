@@ -68,7 +68,7 @@ namespace vVuelos.Controllers
             if (ModelState.IsValid)
             {
                 db.sp_add_fligths(flight.code,flight.consecutive_airline_id,flight.city_id,flight.arrival_date,
-                    flight.arrival_time,flight.consecutive_airport_gate_id_FK,flight.onflight);
+                    flight.arrival_time,flight.consecutive_airport_gate_id_FK,flight.status,flight.onflight);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

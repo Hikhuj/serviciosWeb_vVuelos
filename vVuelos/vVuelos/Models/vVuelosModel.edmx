@@ -369,7 +369,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Parameter Name="LAST_NAME" Type="nvarchar" Mode="In" />
           <Parameter Name="SECOND_LAST" Type="nvarchar" Mode="In" />
           <Parameter Name="SECURITY_Q" Type="nvarchar" Mode="In" />
-          <Parameter Name="COUNTRY" Type="int" Mode="In" />
+          <Parameter Name="COUNTRY" Type="nvarchar" Mode="In" />
           <Parameter Name="ANSWER" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_add_wallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -906,7 +906,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             <Parameter Name="LAST_NAME" Mode="In" Type="String" />
             <Parameter Name="SECOND_LAST" Mode="In" Type="String" />
             <Parameter Name="SECURITY_Q" Mode="In" Type="String" />
-            <Parameter Name="COUNTRY" Mode="In" Type="Int32" />
+            <Parameter Name="COUNTRY" Mode="In" Type="String" />
             <Parameter Name="ANSWER" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_add_wallet" />

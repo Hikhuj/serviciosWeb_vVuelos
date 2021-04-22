@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using vVuelos.Classes;
 using vVuelos.Models;
 
 namespace vVuelos.Controllers
@@ -30,7 +31,8 @@ namespace vVuelos.Controllers
             if (username != null && new_password != null)
             {
                 user currentUser = db.users.Where(m => m.username == username).FirstOrDefault();
-                if (currentUser != null && currentUser.username == username && currentUser.new_password.Equals(new_password))
+                string currentPw = Encryption.DecryptData(currentUser.new_password);
+                if (currentUser != null && currentUser.username == username && currentPw.Equals(new_password))
                 {
                     //creating authentication ticket (will go insde the cookie)
                     var authTicket = new FormsAuthenticationTicket(
