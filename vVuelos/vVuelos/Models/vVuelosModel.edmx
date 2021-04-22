@@ -99,7 +99,8 @@ warning 6002: The table/view 'vVuelos.dbo.countries_cities' does not have a prim
           <Property Name="arrival_date" Type="date" Nullable="false" />
           <Property Name="arrival_time" Type="time" Precision="7" Nullable="false" />
           <Property Name="consecutive_airport_gate_id_FK" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="status" Type="bit" />
+          <Property Name="status" Type="nvarchar" MaxLength="100" />
+          <Property Name="onflight" Type="bit" />
         </EntityType>
         <EntityType Name="log_book">
           <Key>
@@ -156,16 +157,16 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="old_password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="new_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="200" />
+          <Property Name="old_password" Type="nvarchar" MaxLength="200" />
+          <Property Name="new_password" Type="nvarchar" MaxLength="200" />
           <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="middle_name" Type="nvarchar" MaxLength="50" />
           <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="second_last_name" Type="nvarchar" MaxLength="50" />
           <Property Name="rol_id_FK" Type="int" Nullable="false" />
           <Property Name="consecutive_country_id" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="security_question1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="security_question1" Type="nvarchar" MaxLength="200" />
           <Property Name="answer1" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_airlines_countries">
@@ -341,7 +342,8 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Parameter Name="ARRIVAL_DATE" Type="date" Mode="In" />
           <Parameter Name="ARRIVAL_TIME" Type="time" Mode="In" />
           <Parameter Name="AIRPORT_GATE_ID" Type="nvarchar" Mode="In" />
-          <Parameter Name="STATUS" Type="bit" Mode="In" />
+          <Parameter Name="STATUS" Type="nvarchar" Mode="In" />
+          <Parameter Name="ONFLIGHT" Type="bit" Mode="In" />
         </Function>
         <Function Name="sp_add_gates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NUMBER" Type="int" Mode="In" />
@@ -358,7 +360,18 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Parameter Name="USERID" Type="int" Mode="In" />
           <Parameter Name="CONSECUTIVE_COUNTRY" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_add_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_add_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USERNAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="EMAIL" Type="nvarchar" Mode="In" />
+          <Parameter Name="PASSWORD" Type="nvarchar" Mode="In" />
+          <Parameter Name="NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="MIDDLE_NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="LAST_NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="SECOND_LAST" Type="nvarchar" Mode="In" />
+          <Parameter Name="SECURITY_Q" Type="nvarchar" Mode="In" />
+          <Parameter Name="COUNTRY" Type="int" Mode="In" />
+          <Parameter Name="ANSWER" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_add_wallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_change_pw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_create_consecutive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -604,10 +617,11 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <Property Name="arrival_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="arrival_time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="consecutive_airport_gate_id_FK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="status" Type="Boolean" />
+          <Property Name="status" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="airline" Relationship="Self.FK_flights_airlines" FromRole="flights" ToRole="airlines" />
           <NavigationProperty Name="airport_gates" Relationship="Self.FK_flights_airport_gates" FromRole="flights" ToRole="airport_gates" />
           <NavigationProperty Name="city" Relationship="Self.FK_flights_cities" FromRole="flights" ToRole="cities" />
+          <Property Name="onflight" Type="Boolean" />
         </EntityType>
         <EntityType Name="log_book">
           <Key>
@@ -656,16 +670,16 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="old_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="new_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="old_password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="new_password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rol_id_FK" Type="Int32" Nullable="false" />
           <Property Name="consecutive_country_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="security_question1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="security_question1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="answer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="country" Relationship="Self.FK_users_countries1" FromRole="users" ToRole="countries" />
           <NavigationProperty Name="flight_tickets" Relationship="Self.FK_flight_tickets_users" FromRole="users" ToRole="flight_tickets" />
@@ -865,7 +879,8 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             <Parameter Name="ARRIVAL_DATE" Mode="In" Type="DateTime" />
             <Parameter Name="ARRIVAL_TIME" Mode="In" Type="Time" />
             <Parameter Name="AIRPORT_GATE_ID" Mode="In" Type="String" />
-            <Parameter Name="STATUS" Mode="In" Type="Boolean" />
+            <Parameter Name="STATUS" Mode="In" Type="String" />
+            <Parameter Name="ONFLIGHT" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="sp_add_gates">
             <Parameter Name="NUMBER" Mode="In" Type="Int32" />
@@ -882,7 +897,18 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
             <Parameter Name="USERID" Mode="In" Type="Int32" />
             <Parameter Name="CONSECUTIVE_COUNTRY" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_add_user" />
+          <FunctionImport Name="sp_add_user" >
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+            <Parameter Name="PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="MIDDLE_NAME" Mode="In" Type="String" />
+            <Parameter Name="LAST_NAME" Mode="In" Type="String" />
+            <Parameter Name="SECOND_LAST" Mode="In" Type="String" />
+            <Parameter Name="SECURITY_Q" Mode="In" Type="String" />
+            <Parameter Name="COUNTRY" Mode="In" Type="Int32" />
+            <Parameter Name="ANSWER" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_add_wallet" />
           <FunctionImport Name="sp_change_pw" />
           <FunctionImport Name="sp_create_consecutive">
@@ -1039,6 +1065,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
           <EntitySetMapping Name="flights">
             <EntityTypeMapping TypeName="vVuelosModel.flight">
               <MappingFragment StoreEntitySet="flights">
+                <ScalarProperty Name="onflight" ColumnName="onflight" />
                 <ScalarProperty Name="consecutive_flight_id" ColumnName="consecutive_flight_id" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="consecutive_airline_id" ColumnName="consecutive_airline_id" />
@@ -1164,7 +1191,7 @@ warning 6002: The table/view 'vVuelos.dbo.user_card' does not have a primary key
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

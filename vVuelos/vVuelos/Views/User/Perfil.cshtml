@@ -1,0 +1,76 @@
+﻿@model vVuelos.Models.user
+
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<h2>Perfil</h2>
+<br />
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Usuario
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            Segundo Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.middle_name)
+        </dd>
+
+        <dt>
+            Apellido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            Segundo Apellido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.second_last_name)
+        </dd>
+
+        <dt>
+            Pais
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country.name1)
+        </dd>
+
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Actualizar informacion", "UpdateInformation") |
+    @Html.ActionLink("Cambiar contraseña", "ChangePassword") |
+    @Html.ActionLink("Volver", "Index", "Home") 
+</p>

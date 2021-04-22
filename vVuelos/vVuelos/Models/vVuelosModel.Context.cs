@@ -76,7 +76,7 @@ namespace vVuelos.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_country", nAMEParameter, iMAGEParameter);
         }
     
-        public virtual int sp_add_fligths(string cODE, string aIRLINE_ID, Nullable<int> cITY_ID, Nullable<System.DateTime> aRRIVAL_DATE, Nullable<System.TimeSpan> aRRIVAL_TIME, string aIRPORT_GATE_ID, Nullable<bool> sTATUS)
+        public virtual int sp_add_fligths(string cODE, string aIRLINE_ID, Nullable<int> cITY_ID, Nullable<System.DateTime> aRRIVAL_DATE, Nullable<System.TimeSpan> aRRIVAL_TIME, string aIRPORT_GATE_ID, string sTATUS, Nullable<bool> oNFLIGHT)
         {
             var cODEParameter = cODE != null ?
                 new ObjectParameter("CODE", cODE) :
@@ -102,11 +102,15 @@ namespace vVuelos.Models
                 new ObjectParameter("AIRPORT_GATE_ID", aIRPORT_GATE_ID) :
                 new ObjectParameter("AIRPORT_GATE_ID", typeof(string));
     
-            var sTATUSParameter = sTATUS.HasValue ?
+            var sTATUSParameter = sTATUS != null ?
                 new ObjectParameter("STATUS", sTATUS) :
-                new ObjectParameter("STATUS", typeof(bool));
+                new ObjectParameter("STATUS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_fligths", cODEParameter, aIRLINE_IDParameter, cITY_IDParameter, aRRIVAL_DATEParameter, aRRIVAL_TIMEParameter, aIRPORT_GATE_IDParameter, sTATUSParameter);
+            var oNFLIGHTParameter = oNFLIGHT.HasValue ?
+                new ObjectParameter("ONFLIGHT", oNFLIGHT) :
+                new ObjectParameter("ONFLIGHT", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_fligths", cODEParameter, aIRLINE_IDParameter, cITY_IDParameter, aRRIVAL_DATEParameter, aRRIVAL_TIMEParameter, aIRPORT_GATE_IDParameter, sTATUSParameter, oNFLIGHTParameter);
         }
     
         public virtual int sp_add_gates(Nullable<int> nUMBER, Nullable<bool> sTATUS)
@@ -160,9 +164,49 @@ namespace vVuelos.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_tickets", uSERIDParameter, cONSECUTIVE_COUNTRYParameter);
         }
     
-        public virtual int sp_add_user()
+        public virtual int sp_add_user(string uSERNAME, string eMAIL, string pASSWORD, string nAME, string mIDDLE_NAME, string lAST_NAME, string sECOND_LAST, string sECURITY_Q, Nullable<int> cOUNTRY, string aNSWER)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_user");
+            var uSERNAMEParameter = uSERNAME != null ?
+                new ObjectParameter("USERNAME", uSERNAME) :
+                new ObjectParameter("USERNAME", typeof(string));
+    
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            var pASSWORDParameter = pASSWORD != null ?
+                new ObjectParameter("PASSWORD", pASSWORD) :
+                new ObjectParameter("PASSWORD", typeof(string));
+    
+            var nAMEParameter = nAME != null ?
+                new ObjectParameter("NAME", nAME) :
+                new ObjectParameter("NAME", typeof(string));
+    
+            var mIDDLE_NAMEParameter = mIDDLE_NAME != null ?
+                new ObjectParameter("MIDDLE_NAME", mIDDLE_NAME) :
+                new ObjectParameter("MIDDLE_NAME", typeof(string));
+    
+            var lAST_NAMEParameter = lAST_NAME != null ?
+                new ObjectParameter("LAST_NAME", lAST_NAME) :
+                new ObjectParameter("LAST_NAME", typeof(string));
+    
+            var sECOND_LASTParameter = sECOND_LAST != null ?
+                new ObjectParameter("SECOND_LAST", sECOND_LAST) :
+                new ObjectParameter("SECOND_LAST", typeof(string));
+    
+            var sECURITY_QParameter = sECURITY_Q != null ?
+                new ObjectParameter("SECURITY_Q", sECURITY_Q) :
+                new ObjectParameter("SECURITY_Q", typeof(string));
+    
+            var cOUNTRYParameter = cOUNTRY.HasValue ?
+                new ObjectParameter("COUNTRY", cOUNTRY) :
+                new ObjectParameter("COUNTRY", typeof(int));
+    
+            var aNSWERParameter = aNSWER != null ?
+                new ObjectParameter("ANSWER", aNSWER) :
+                new ObjectParameter("ANSWER", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_user", uSERNAMEParameter, eMAILParameter, pASSWORDParameter, nAMEParameter, mIDDLE_NAMEParameter, lAST_NAMEParameter, sECOND_LASTParameter, sECURITY_QParameter, cOUNTRYParameter, aNSWERParameter);
         }
     
         public virtual int sp_add_wallet()

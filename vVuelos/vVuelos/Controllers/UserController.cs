@@ -16,6 +16,7 @@ namespace vVuelos.Controllers
         private vVuelosEntities db = new vVuelosEntities();
 
         // GET: User
+        [Authorize]
         public ActionResult Index()
         {
             var users = db.users.Include(u => u.country).Include(u => u.role);
@@ -24,11 +25,14 @@ namespace vVuelos.Controllers
 
         //GET: User/Profile
         [Authorize]
-        public ActionResult Profile() {
-            return View();
+        public ActionResult Perfil() {
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            user currentUser = db.users.Find(currentUserId);
+            return View(currentUser);
         }
 
         // GET: User/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace vVuelos.Controllers
         }
 
         // GET: User/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1");
@@ -52,6 +57,7 @@ namespace vVuelos.Controllers
         }
 
         // POST: User/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,username,email,old_password,new_password,first_name,middle_name,last_name,second_last_name,rol_id_FK,cards,consecutive_country_id,security_question1,answer1")] user user)
@@ -87,6 +93,7 @@ namespace vVuelos.Controllers
         }
 
         // POST: User/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,username,email,old_password,new_password,first_name,middle_name,last_name,second_last_name,rol_id_FK,cards,consecutive_country_id,security_question1,answer1")] user user)
@@ -130,7 +137,9 @@ namespace vVuelos.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(user user) {
+        public ActionResult Register(string username, string email, string first_name,string middle_name,
+            string last_name, string second_lastname, string country, string rol, string sec_question, string sec_answer)
+        { 
             return View();
         }
 

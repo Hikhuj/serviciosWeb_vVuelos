@@ -6,43 +6,40 @@
 
 <h2>Departures</h2>
 <input type="text" id="searchBox" onkeyup="searchFlight()" placeholder="Buscar vuelos" class="form-control>
-<table class="table">
+<table class="table" id="flightsTable">
     <tr>
         <th>
-            ID
+            VUELO
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.code)
+            Aerolinea
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.arrival_date)
+            Procedencia
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.arrival_time)
+            FECHA
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.status)
+            HORA
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.airline.name)
+            ESTADO
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.airport_gates.consecutive_airport_gate_id)
+            PUERTA
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city.name)
-        </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>@Html.DisplayNameFor(modelItem => modelItem.code)</td>
             <td>
-                @Html.DisplayNameFor(modelItem => modelItem.consecutive_flight_id)
+                @Html.DisplayFor(modelItem => item.airline.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.code)
+                @Html.DisplayFor(modelItem => item.city.name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.arrival_date)
@@ -54,18 +51,9 @@
                 @Html.DisplayFor(modelItem => item.status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.airline.name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.airport_gates.consecutive_airport_gate_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city.name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.consecutive_flight_id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.consecutive_flight_id })
             </td>
         </tr>
     }
+</table>
 

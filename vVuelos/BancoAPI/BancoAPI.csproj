@@ -169,6 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\VerificacionEasyPay.cs" />
     <Compile Include="Logic\VerificacionTarjeta.cs" />
     <Compile Include="Models\BancoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -192,6 +193,7 @@
     <Compile Include="Models\customer.cs">
       <DependentUpon>BancoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EasyPayModel.cs" />
     <Compile Include="Models\easy_pay.cs">
       <DependentUpon>BancoModel.tt</DependentUpon>
     </Compile>

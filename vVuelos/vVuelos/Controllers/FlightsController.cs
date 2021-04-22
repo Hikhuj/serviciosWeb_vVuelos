@@ -23,15 +23,15 @@ namespace vVuelos.Controllers
         //GET: Arrivals
         public ActionResult Arrivals()
         {
-            var flights = db.flights.Include(f => f.airline).Include(f => f.airport_gates).Include(f => f.city);
-            return View(flights.ToList());
+            var flights = db.flights.Where(f => f.onflight == true).ToList(); ;
+            return View(flights);
         }
 
         //GET: Departures
         public ActionResult Departures()
         {
-            var flights = db.flights.Include(f => f.airline).Include(f => f.airport_gates).Include(f => f.city);
-            return View(flights.ToList());
+            var flights = db.flights.Where(f=>f.onflight == false).ToList();
+            return View(flights);
         }
 
         // GET: flights/Details/5
@@ -68,7 +68,7 @@ namespace vVuelos.Controllers
             if (ModelState.IsValid)
             {
                 db.sp_add_fligths(flight.code,flight.consecutive_airline_id,flight.city_id,flight.arrival_date,
-                    flight.arrival_time,flight.consecutive_airport_gate_id_FK,flight.status);
+                    flight.arrival_time,flight.consecutive_airport_gate_id_FK,flight.onflight);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

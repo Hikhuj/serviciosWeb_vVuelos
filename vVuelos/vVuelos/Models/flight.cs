@@ -21,7 +21,8 @@ namespace vVuelos.Models
         public System.DateTime arrival_date { get; set; }
         public System.TimeSpan arrival_time { get; set; }
         public string consecutive_airport_gate_id_FK { get; set; }
-        public Nullable<bool> status { get; set; }
+        public string status { get; set; }
+        public Nullable<bool> onflight { get; set; }
     
         public virtual airline airline { get; set; }
         public virtual airport_gates airport_gates { get; set; }

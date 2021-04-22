@@ -203,6 +203,7 @@
     <Compile Include="Models\country.cs">
       <DependentUpon>vVuelosModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\error.cs">
       <DependentUpon>vVuelosModel.tt</DependentUpon>
     </Compile>
@@ -255,6 +256,7 @@
     <Content Include="Global.asax" />
     <Content Include="img\Flags\Costa Rica.png" />
     <Content Include="img\Flags\USA.jpg" />
+    <Content Include="img\utils\miami.jpg" />
     <Content Include="Models\vVuelosModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>vVuelosModel.Context.cs</LastGenOutput>
@@ -353,7 +355,7 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\UpdateInformation.cshtml" />
-    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\Perfil.cshtml" />
     <Content Include="Views\Reservations\Create.cshtml" />
     <Content Include="Views\Reservations\Delete.cshtml" />
     <Content Include="Views\Reservations\Details.cshtml" />

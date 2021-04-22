@@ -1,6 +1,7 @@
 ﻿using BancoAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -32,6 +33,8 @@ namespace BancoAPI.Logic
                             {
                                 //Make payment
                                 currentCard.balance = currentCard.balance - monto;
+                                db.Entry(currentCard).State = EntityState.Modified;
+                                db.SaveChanges();
                                 return 0;
                             }
                             else { return -4; }

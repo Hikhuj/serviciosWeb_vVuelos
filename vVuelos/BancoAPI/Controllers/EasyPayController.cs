@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BancoAPI.Logic;
+using BancoAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +11,7 @@ namespace BancoAPI.Controllers
 {
     public class EasyPayController : ApiController
     {
+        private vVuelos_paymentEntities db = new vVuelos_paymentEntities();
         // GET: api/EasyPay
         public IEnumerable<string> Get()
         {
@@ -22,9 +25,10 @@ namespace BancoAPI.Controllers
         }
 
         // POST: api/EasyPay
-        public void Post([FromBody]string num_cuenta, int cod_seg, string password)
+        public object Post([FromBody] EasyPayModel account)
         {
-            
+            int status = VerificacionEasyPay.VerificarEasyPay(account,db);
+            return Request.CreateResponse(HttpStatusCode.OK, new { status });
         }
 
         // PUT: api/EasyPay/5
