@@ -11,13 +11,17 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class reservation
     {
         public string consecutive_reserve_id { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public int user_id { get; set; }
         public string booking_id { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public int amount { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public int total { get; set; }
         public System.DateTime alert { get; set; }
     }

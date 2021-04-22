@@ -11,7 +11,8 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class airport_gates
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +22,7 @@ namespace vVuelos.Models
         }
     
         public string consecutive_airport_gate_id { get; set; }
+        [Required(ErrorMessage = "Debe ingresar un dato")]
         public int number { get; set; }
         public bool status { get; set; }
     

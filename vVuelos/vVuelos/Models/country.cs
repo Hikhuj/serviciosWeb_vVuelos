@@ -25,9 +25,10 @@ namespace vVuelos.Models
         }
     
         public string consecutive_country_id { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string name1 { get; set; }
         [DataType(DataType.Upload)]
-        [Display(Name = "Upload File")]
+        [Display(Name = "Bandera")]
         [Required(ErrorMessage = "Please choose file to upload.")]
         public string image { get; set; }
     

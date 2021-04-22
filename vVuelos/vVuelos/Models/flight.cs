@@ -11,10 +11,12 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class flight
     {
         public string consecutive_flight_id { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string code { get; set; }
         public string consecutive_airline_id { get; set; }
         public int city_id { get; set; }

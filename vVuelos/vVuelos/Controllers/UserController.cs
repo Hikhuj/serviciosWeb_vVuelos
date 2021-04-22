@@ -23,8 +23,15 @@ namespace vVuelos.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var users = db.users.Include(u => u.country).Include(u => u.role);
-            return View(users.ToList());
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                var users = db.users.Include(u => u.country).Include(u => u.role);
+                return View(users.ToList());
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         //GET: User/Profile
@@ -39,25 +46,39 @@ namespace vVuelos.Controllers
         [Authorize]
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                user user = db.users.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
             }
-            user user = db.users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // GET: User/Create
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1");
-            ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name");
-            return View();
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1");
+                ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name");
+                return View();
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // POST: User/Create
@@ -66,37 +87,51 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,username,email,old_password,new_password,first_name,middle_name,last_name,second_last_name,rol_id_FK,cards,consecutive_country_id,security_question1,answer1")] user user)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                string passwordEnc = Encryption.EncryptData(user.new_password);
-                int status = db.sp_add_user(user.username, user.email, passwordEnc, user.first_name, user.middle_name, user.last_name, user.second_last_name, user.security_question1, user.consecutive_country_id, user.answer1);
-                if (status > 0)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
+                    string passwordEnc = Encryption.EncryptData(user.new_password);
+                    int status = db.sp_add_user(user.username, user.email, passwordEnc, user.first_name, user.middle_name, user.last_name, user.second_last_name, user.security_question1, user.consecutive_country_id, user.answer1);
+                    if (status > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-            }
 
-            ViewBag.error = "Usuario o correo ya estan registrados";
-            ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
-            return View(user);
+                ViewBag.error = "Usuario o correo ya estan registrados";
+                ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
+                return View(user);
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // GET: User/Edit/5
         [Authorize]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                user user = db.users.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
+                ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
+                return View(user);
             }
-            user user = db.users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
-            ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
-            return View(user);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // POST: User/Edit/5
@@ -105,15 +140,22 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,username,email,old_password,new_password,first_name,middle_name,last_name,second_last_name,rol_id_FK,cards,consecutive_country_id,security_question1,answer1")] user user)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
+                ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
+                return View(user);
             }
-            ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
-            ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
-            return View(user);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
 

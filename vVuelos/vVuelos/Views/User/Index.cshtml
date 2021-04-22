@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Usuarios</h2>
@@ -51,12 +52,6 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.old_password)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.new_password)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.first_name)

@@ -11,11 +11,14 @@ namespace vVuelos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class consecutive
     {
         public int id { get; set; }
+        [Required(ErrorMessage = "Campo requerido")]
         public string description { get; set; }
+        [Required(ErrorMessage ="Campo requerido")]
         public int value { get; set; }
         public string prefix { get; set; }
         public Nullable<int> range_int { get; set; }

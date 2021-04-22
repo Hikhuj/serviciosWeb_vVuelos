@@ -7,10 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using vVuelos.Classes;
 using vVuelos.Models;
 
 namespace vVuelos.Controllers
 {
+    [Authorize]
     public class airlinesController : Controller
     {
         private vVuelosEntities db = new vVuelosEntities();
@@ -18,8 +21,14 @@ namespace vVuelos.Controllers
         // GET: airlines
         public ActionResult Index()
         {
-            var airlines = db.airlines.Include(a => a.country);
-            return View(airlines.ToList());
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                var airlines = db.airlines.Include(a => a.country);
+                return View(airlines.ToList());
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+         
         }
 
         // GET: airlines/Details/5
@@ -40,8 +49,14 @@ namespace vVuelos.Controllers
         // GET: airlines/Create
         public ActionResult Create()
         {
-            ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1");
-            return View();
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1");
+                return View();
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+            
         }
 
         // POST: airlines/Create
@@ -51,37 +66,51 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(string name, string consecutive_country_id_FK,HttpPostedFileBase image, bool status)
         {
-            airline airline = new airline(name, consecutive_country_id_FK,"~/img/Airline/"+image.FileName,status);
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                int affectedRows = db.sp_add_airline(airline.name,airline.consecutive_country_id_FK,airline.image,airline.status);
-                if (affectedRows > 0)
+                airline airline = new airline(name, consecutive_country_id_FK, "~/img/Airline/" + image.FileName, status);
+                airline.image = "~/img/Airline/" + image.FileName;
+                if (ModelState.IsValid)
                 {
-                    string path = Path.Combine(Server.MapPath("~/img/Airline/"), Path.GetFileName(image.FileName));
-                    image.SaveAs(path);
-                    return RedirectToAction("Index");
+                    int affectedRows = db.sp_add_airline(airline.name, airline.consecutive_country_id_FK, airline.image, airline.status);
+                    if (affectedRows > 0)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/img/Airline/"), Path.GetFileName(image.FileName));
+                        image.SaveAs(path);
+                        return RedirectToAction("Index");
+                    }
+
                 }
 
+                ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);
+                return View(airline);
             }
+            return RedirectToAction("Unauthorized", "Auth");
 
-            ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);
-            return View(airline);
+            
         }
 
         // GET: airlines/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                airline airline = db.airlines.Find(id);
+                if (airline == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);
+                return View(airline);
             }
-            airline airline = db.airlines.Find(id);
-            if (airline == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);
-            return View(airline);
+            return RedirectToAction("Unauthorized", "Auth");
+            
         }
 
         // POST: airlines/Edit/5
@@ -91,14 +120,21 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "consecutive_airline_id,name,consecutive_country_id_FK,image,status")] airline airline)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                db.Entry(airline).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(airline).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);
+                return View(airline);
             }
-            ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1", airline.consecutive_country_id_FK);
-            return View(airline);
+            return RedirectToAction("Unauthorized", "Auth");
+
         }
 
         protected override void Dispose(bool disposing)

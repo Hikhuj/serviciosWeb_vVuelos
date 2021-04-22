@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using vVuelos.Classes;
 using vVuelos.Models;
 
 namespace vVuelos.Controllers
@@ -17,28 +19,48 @@ namespace vVuelos.Controllers
         // GET: Gates
         public ActionResult Index()
         {
-            return View(db.airport_gates.ToList());
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                return View(db.airport_gates.ToList());
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+
         }
 
         // GET: Gates/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                airport_gates airport_gates = db.airport_gates.Find(id);
+                if (airport_gates == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(airport_gates);
             }
-            airport_gates airport_gates = db.airport_gates.Find(id);
-            if (airport_gates == null)
-            {
-                return HttpNotFound();
-            }
-            return View(airport_gates);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // GET: Gates/Create
         public ActionResult Create()
         {
-            return View();
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                return View();
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // POST: Gates/Create
@@ -48,29 +70,43 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "consecutive_airport_gate_id,number,status")] airport_gates airport_gates)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                db.sp_add_gates(airport_gates.number,airport_gates.status);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.sp_add_gates(airport_gates.number, airport_gates.status);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(airport_gates);
+                return View(airport_gates);
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // GET: Gates/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                airport_gates airport_gates = db.airport_gates.Find(id);
+                if (airport_gates == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(airport_gates);
             }
-            airport_gates airport_gates = db.airport_gates.Find(id);
-            if (airport_gates == null)
-            {
-                return HttpNotFound();
-            }
-            return View(airport_gates);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // POST: Gates/Edit/5
@@ -80,13 +116,20 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "consecutive_airport_gate_id,number,status")] airport_gates airport_gates)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                db.Entry(airport_gates).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(airport_gates).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(airport_gates);
             }
-            return View(airport_gates);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         protected override void Dispose(bool disposing)

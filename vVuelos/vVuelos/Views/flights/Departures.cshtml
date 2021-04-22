@@ -37,7 +37,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.code)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.code)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.airline.name)
             </td>

@@ -18,6 +18,10 @@ namespace vVuelos.Controllers
             return View();
         }
 
+        public ActionResult Unauthorized() {
+            return View();
+        }
+
         public ActionResult Login()
         {
 

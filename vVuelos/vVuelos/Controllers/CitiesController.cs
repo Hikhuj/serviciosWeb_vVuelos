@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using vVuelos.Classes;
 using vVuelos.Models;
 
 namespace vVuelos.Controllers
 {
+    [Authorize]
     public class CitiesController : Controller
     {
         private vVuelosEntities db = new vVuelosEntities();
@@ -23,23 +26,36 @@ namespace vVuelos.Controllers
         // GET: Cities/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                city city = db.cities.Find(id);
+                if (city == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(city);
             }
-            city city = db.cities.Find(id);
-            if (city == null)
-            {
-                return HttpNotFound();
-            }
-            return View(city);
+            return RedirectToAction("Unauthorized", "Auth");
+
+            
         }
 
         // GET: Cities/Create
         public ActionResult Create()
         {
-            ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1");
-            return View();
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
+            {
+                ViewBag.consecutive_country_id_FK = new SelectList(db.countries, "consecutive_country_id", "name1");
+                return View();
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+            
         }
 
         // POST: Cities/Create
@@ -49,29 +65,41 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,consecutive_country_id_FK")] city city)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                db.cities.Add(city);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.cities.Add(city);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(city);
+                return View(city);
+            }
+            return RedirectToAction("Unauthorized", "Auth");
+            
         }
 
         // GET: Cities/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                city city = db.cities.Find(id);
+                if (city == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(city);
             }
-            city city = db.cities.Find(id);
-            if (city == null)
-            {
-                return HttpNotFound();
-            }
-            return View(city);
+            return RedirectToAction("Unauthorized", "Auth");
+            
         }
 
         // POST: Cities/Edit/5
@@ -81,13 +109,19 @@ namespace vVuelos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,consecutive_country_id_FK")] city city)
         {
-            if (ModelState.IsValid)
+            int currentUserId = Int32.Parse(FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            if (UserVerficication.IsAdmin(currentUserId, db))
             {
-                db.Entry(city).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(city).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(city);
             }
-            return View(city);
+            return RedirectToAction("Unauthorized", "Auth");
+            
         }
 
         protected override void Dispose(bool disposing)
