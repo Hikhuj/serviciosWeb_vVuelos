@@ -68,13 +68,16 @@ namespace vVuelos.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string passwordEnc = Encryption.EncryptData(user.new_password);
+                int status = db.sp_add_user(user.username, user.email, passwordEnc, user.first_name, user.middle_name, user.last_name, user.second_last_name, user.security_question1, user.consecutive_country_id, user.answer1);
+                if (status > 0)
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
+            ViewBag.error = "Usuario o correo ya estan registrados";
             ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
-            ViewBag.rol_id_FK = new SelectList(db.roles, "id", "name", user.rol_id_FK);
             return View(user);
         }
 
@@ -159,9 +162,11 @@ namespace vVuelos.Controllers
                 int status = db.sp_add_user(user.username, user.email, passwordEnc, user.first_name, user.middle_name, user.last_name, user.second_last_name, user.security_question1, user.consecutive_country_id, user.answer1);
                 if (status > 0)
                 {
-                    return RedirectToAction("Login", "Auth", null);
+                    return RedirectToAction("AccountVerification");
                 }
             }
+
+            ViewBag.error = "Usuario o correo ya estan registrados";
             ViewBag.consecutive_country_id = new SelectList(db.countries, "consecutive_country_id", "name1", user.consecutive_country_id);
             return View(user);
             

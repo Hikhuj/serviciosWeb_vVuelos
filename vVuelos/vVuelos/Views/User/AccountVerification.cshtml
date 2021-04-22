@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "AccountVerification";
+}
+
+<div class="jumbotron">
+    <h2>Gracias por ser parte de nuestra flota</h2>
+    <p>Su usuario se ha creado exitosamente, sera redirigido a la pagina de inicio de sesion para que pueda disfrutar de la experiencia.</p>
+</div>
+
+    
+<script>
+    function Redirect() {
+        window.location = "../../Auth/Login";
+    }
+    setTimeout('Redirect()', 5000); 
+</script>

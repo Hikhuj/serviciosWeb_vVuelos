@@ -11,20 +11,21 @@
 </p>
 <table class="table">
     <tr>
+        <th>ID</th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            Descripcion
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.value)
+            Consecutivo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.prefix)
+            Prefijo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.range_int)
+            Rango Inicial
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.range_out)
+            Rango Final
         </th>
         <th></th>
     </tr>
@@ -49,7 +50,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Menu","Console","Home")
         </td>
     </tr>
 }

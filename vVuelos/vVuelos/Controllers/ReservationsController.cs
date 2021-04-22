@@ -89,6 +89,12 @@ namespace vVuelos.Controllers
             return View(reservation);
         }
 
+
+        //GET: 
+        public ActionResult Compra(int? id) {
+            return View();
+        }
+
         // GET: Reservations/Delete/5
         public ActionResult Delete(string id)
         {

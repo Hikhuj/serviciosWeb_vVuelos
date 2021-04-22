@@ -5,7 +5,7 @@
 }
 
 <h2>Departures</h2>
-<input type="text" id="searchBox" onkeyup="searchFlight()" placeholder="Buscar vuelos" class="form-control>
+<input type="text" id="searchBox" onkeyup="searchFlight()" placeholder="Buscar vuelos" class="form-control">
 <table class="table" id="flightsTable">
     <tr>
         <th>
@@ -29,12 +29,15 @@
         <th>
             PUERTA
         </th>
+        <th>
+
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayNameFor(modelItem => modelItem.code)</td>
+            <td>@Html.DisplayFor(modelItem => item.code)</td>
             <td>
                 @Html.DisplayFor(modelItem => item.airline.name)
             </td>
@@ -42,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.city.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.arrival_date)
+                @Html.DisplayFor(modelItem => item.arrival_date.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.arrival_time)
@@ -53,7 +56,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.airport_gates.consecutive_airport_gate_id)
             </td>
+            <td>
+                @Html.ActionLink("Comprar","Compra","Reservations",null,new {id=item.consecutive_flight_id}) | 
+                @Html.ActionLink("Reservar","Create","Reservations")
+            </td>
         </tr>
     }
 </table>
 
+<script src="~/Scripts/js/Flights.js" type="text/javascript"></script>

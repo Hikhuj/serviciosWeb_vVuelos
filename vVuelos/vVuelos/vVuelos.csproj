@@ -324,7 +324,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Consecutive\Create.cshtml" />
-    <Content Include="Views\Consecutive\Delete.cshtml" />
     <Content Include="Views\Consecutive\Details.cshtml" />
     <Content Include="Views\Consecutive\Edit.cshtml" />
     <Content Include="Views\Consecutive\Index.cshtml" />
@@ -342,7 +341,6 @@
     <Content Include="Views\countries\Edit.cshtml" />
     <Content Include="Views\countries\Index.cshtml" />
     <Content Include="Views\flights\Create.cshtml" />
-    <Content Include="Views\flights\Delete.cshtml" />
     <Content Include="Views\flights\Details.cshtml" />
     <Content Include="Views\flights\Edit.cshtml" />
     <Content Include="Views\flights\Index.cshtml" />
@@ -363,6 +361,9 @@
     <Content Include="Views\Reservations\Index.cshtml" />
     <Content Include="Views\flights\Arrivals.cshtml" />
     <Content Include="Views\flights\Departures.cshtml" />
+    <Content Include="Views\Shared\Unauthorized.cshtml" />
+    <Content Include="Views\User\AccountVerification.cshtml" />
+    <Content Include="Views\Reservations\Compra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -63,7 +63,7 @@ namespace vVuelos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "consecutive_flight_id,code,consecutive_airline_id,city_id,arrival_date,arrival_time,consecutive_airport_gate_id_FK,status")] flight flight)
+        public ActionResult Create([Bind(Include = "consecutive_flight_id,code,consecutive_airline_id,city_id,arrival_date,arrival_time,consecutive_airport_gate_id_FK,status,onflight")] flight flight)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace vVuelos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "consecutive_flight_id,code,consecutive_airline_id,city_id,arrival_date,arrival_time,consecutive_airport_gate_id_FK,status")] flight flight)
+        public ActionResult Edit([Bind(Include = "consecutive_flight_id,code,consecutive_airline_id,city_id,arrival_date,arrival_time,consecutive_airport_gate_id_FK,status,onflight")] flight flight)
         {
             if (ModelState.IsValid)
             {

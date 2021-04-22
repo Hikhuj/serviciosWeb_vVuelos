@@ -11,7 +11,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.code)
+            ID
+        </dt>
+        <dt>
+            CODIGO
         </dt>
 
         <dd>
@@ -19,7 +22,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.arrival_date)
+            FECHA
         </dt>
 
         <dd>
@@ -27,7 +30,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.arrival_time)
+            HORA
         </dt>
 
         <dd>
@@ -35,7 +38,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.status)
+            ESTADO
         </dt>
 
         <dd>
@@ -43,7 +46,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.airline.name)
+            AEROLINEA
         </dt>
 
         <dd>
@@ -51,7 +54,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.airport_gates.consecutive_airport_gate_id)
+            PUERTA
         </dt>
 
         <dd>
@@ -59,12 +62,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.city.name)
+            CIUDAD
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.city.name)
         </dd>
+        <dt>
+            SALIDA - LLEGADA
+        </dt>
+        <dd>@Html.DisplayFor(model => model.onflight.Value)</dd>
 
     </dl>
 </div>
