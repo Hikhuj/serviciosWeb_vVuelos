@@ -1,0 +1,53 @@
+﻿@model vVuelos.Models.flight
+
+
+@{
+    ViewBag.Title = "compraEasyPay";
+}
+
+
+<h2>Bienvenido a EasyPay</h2>
+
+<section class="form-register">
+    <h4>Detalles del Tiquete</h4>
+    <label>Destino:</label>
+    <label id="destino">@Html.DisplayFor(model => model.city.name)</label>
+    <br>
+    <br>
+
+    <label>Fecha:</label>
+    <label id="arrival_date">@Html.DisplayFor(model => model.arrival_date)</label>
+    <br>
+    <br>
+
+    <label>Hora:</label>
+    <label id="arrival_time">@Html.DisplayFor(model => model.arrival_time)</label>
+    <br>
+    <br>
+
+    <label>Aerolinea:</label>
+    <label id="airline">@Html.DisplayFor(model => model.airline.name)</label>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h4>Ingrese su informacion Easy Pay</h4>
+    <label>Numero de cuenta Easy Pay:</label>
+    <input class="controls" type="text" name="numeroEasyPay" id="txtNumeroEasyPay">
+    <label>Codigo de Seguridad:</label>
+    <input class="controls" type="password" name="codigoSeguridad" id="txtCodigoSeguridad">
+    <label>Contraseña:</label>
+    <input class="controls" type="password" name="password" id="txtPassword">
+    <br>
+    <br>
+    <br>
+    <br>
+    <label>Total a pagar =</label>
+    <label id="total">$600</label>
+    <br>
+    <br>
+    <input class="buttons" type="submit" id="btnComprar" onClick="alert('Se realizó la compra del boleto')" value="Comprar">
+    <input class="buttons" type="submit" id="btnCancelar" value="Cancelar">
+</section>

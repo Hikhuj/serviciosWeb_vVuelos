@@ -89,12 +89,6 @@ namespace vVuelos.Controllers
             return View(reservation);
         }
 
-
-        //GET: 
-        public ActionResult Compra(int? id) {
-            return View();
-        }
-
         // GET: Reservations/Delete/5
         public ActionResult Delete(string id)
         {
@@ -108,6 +102,32 @@ namespace vVuelos.Controllers
                 return HttpNotFound();
             }
             return View(reservation);
+        }
+
+        public ActionResult compraEasyPay(string id)
+        {
+            flight flights = new flight();
+            flights = db.flights.Find(id);
+            if (flights != null)
+            {
+                return View(flights);
+            }
+            return View(flights);
+
+        }
+
+        public ActionResult Compra(string id)
+        {
+            flight flights = new flight();
+            flights = db.flights.Find(id);
+            if (flights != null)
+            {
+                return View(flights);
+            }
+            else
+            {
+                return RedirectToAction("Departures", "flights");
+            }
         }
 
         // POST: Reservations/Delete/5

@@ -4,8 +4,11 @@
     ViewBag.Title = "Departures";
 }
 
-<h2>Departures</h2>
+<h2>Salidas</h2>
+<br />
 <input type="text" id="searchBox" onkeyup="searchFlight()" placeholder="Buscar vuelos" class="form-control">
+<br />
+<br />
 <table class="table" id="flightsTable">
     <tr>
         <th>
@@ -59,7 +62,7 @@
                 @Html.DisplayFor(modelItem => item.airport_gates.consecutive_airport_gate_id)
             </td>
             <td>
-                @Html.ActionLink("Comprar","Compra","Reservations",null,new {id=item.consecutive_flight_id}) | 
+                @Html.ActionLink("Comprar","Compra","Reservations", new {id=item.consecutive_flight_id}, null) | 
                 @Html.ActionLink("Reservar","Create","Reservations")
             </td>
         </tr>

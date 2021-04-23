@@ -1,7 +1,75 @@
-﻿
+﻿@model vVuelos.Models.flight
+
 @{
     ViewBag.Title = "Compra";
 }
 
 <h2>Compra</h2>
 
+<section class="form-register">
+    <h4>Detalles del Tiquete</h4>
+
+    <label>Destino:</label>
+    <label id="destino">@Html.DisplayFor(model => model.city.name)</label>
+    <br>
+    <br>
+
+    <label>Fecha:</label>
+    <label id="arrival_date">@Html.DisplayFor(model => model.arrival_date)</label>
+    <br>
+    <br>
+
+    <label>Hora:</label>
+    <label id="arrival_time">@Html.DisplayFor(model => model.arrival_time)</label>
+    <br>
+    <br>
+
+    <label>Aerolinea:</label>
+    <label id="airline">@Html.DisplayFor(model => model.airline.name)</label>
+    <br>
+    <br>
+    <br>
+
+    <h4>Ingrese su informacion</h4>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Numero de Tarjeta:</label>
+                <br />
+                <br />
+                <label>Nombre del Representante:</label>
+                <br />
+                <br />
+                <label>Fecha de expiracion:</label>
+                <br />
+                <br />
+                <label>CVV:</label>
+            </div>
+            <div class="col-sm-2">
+                <input class="controls" type="text" name="numeroTarjeta" id="txtNumeroTarjeta" maxlength="11">
+                <br />
+                <br />
+                <input class="controls" type="text" name="nombreRepresentante" id="txtNombreRepresentante">
+                <br />
+                <br />
+                <input class="controls" type="text" name="fechaExpiracion" id="txtFechaExpiracion">
+                <br />
+                <br />
+                <input class="controls" type="text" name="cvv" id="txtCvv">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container">Total a pagar = <label id="total">$600</label></div>
+  
+    <br>
+    <input class="buttons" type="submit" id="btnComprar" value="Comprar">
+
+    <!-- <input class="buttons" type="submit" id="btnEasyPay" @Html.ActionLink("Comprar", "compraEasyPay", "Reservations", new { id = Model.consecutive_flight_id }, null) value="Pagar con Easy Pay">-->
+
+    <button class="buttons" type="button" id="btnEasyPay">@Html.ActionLink("Pago EasyPay", "compraEasyPay", "Reservations", new { id = Model.consecutive_flight_id }, null)</button>
+
+    <button class="buttons" type="button" id="btnCancelar" value="Cancelar">@Html.ActionLink("Cancelar","Departure","flights")</button>
+
+</section>
