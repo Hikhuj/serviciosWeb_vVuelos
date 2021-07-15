@@ -19,8 +19,15 @@ namespace vVuelos
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            /*
+             *  DO NOT ERASE: Main custom CSS
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
+            */
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap-superhero.css",
                       "~/Content/site.css"));
         }
     }
