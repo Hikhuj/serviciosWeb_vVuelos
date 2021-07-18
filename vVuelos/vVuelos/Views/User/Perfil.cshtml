@@ -10,67 +10,59 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Usuario
+            Usuario:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.username)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.email)
+            Correo Electrónico:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.email)
         </dd>
 
         <dt>
-            Nombre
+            Nombre:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.first_name)
         </dd>
 
         <dt>
-            Segundo Nombre
+            Segundo Nombre:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.middle_name)
         </dd>
 
         <dt>
-            Apellido
+            Apellido:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.last_name)
         </dd>
 
         <dt>
-            Segundo Apellido
+            Segundo Apellido:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.second_last_name)
         </dd>
 
         <dt>
-            Pais
+            País:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.country.name1)
         </dd>
-
 
     </dl>
 </div>
 
 <p>
-    @Html.ActionLink("Actualizar informacion", "UpdateInformation") |
+    @Html.ActionLink("Actualizar información", "UpdateInformation") |
     @Html.ActionLink("Cambiar contraseña", "ChangePassword") |
     @Html.ActionLink("Volver", "Index", "Home") 
 </p>

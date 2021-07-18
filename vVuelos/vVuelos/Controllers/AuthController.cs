@@ -35,6 +35,7 @@ namespace vVuelos.Controllers
             if (username != null && new_password != null)
             {
                 user currentUser = db.users.Where(m => m.username == username).FirstOrDefault();
+                Console.WriteLine
                 string currentPw = Encryption.DecryptData(currentUser.new_password);
                 if (currentUser != null && currentUser.username == username && currentPw.Equals(new_password))
                 {
