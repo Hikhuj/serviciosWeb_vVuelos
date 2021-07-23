@@ -6,76 +6,47 @@
 }
 
 <h2>Usuarios</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            ID
-        </th>
-        <th>
-            username
-        </th>
-        <th>
-            email
-        </th>
-        <th>
-            Nombre
-        </th>
-        <th>
-            Segundo Nombre
-        </th>
-        <th>
-            Apellido
-        </th>
-        <th>
-            Segundo Apellido
-        </th>
-        <th>
-           Pais
-        </th>
-        <th>
-            Rol
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.username)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.first_name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.middle_name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.last_name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.second_last_name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.country.name1)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.role.name)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-    </td>
-</tr>
-}
-
-</table>
+<hr />
+<div class="container">
+    <div class="row">
+        <table class="table table-hover bg-light">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="h5">ID</th>
+                    <th scope="col" class="h5">Usuario</th>
+                    <th scope="col" class="h5">Correo electrónico</th>
+                    <th scope="col" class="h5">Nombre</th>
+                    <th scope="col" class="h5">Segundo Nombre</th>
+                    <th scope="col" class="h5">Apellido</th>
+                    <th scope="col" class="h5">Segundo Apellido</th>
+                    <th scope="col" class="h5">País</th>
+                    <th scope="col" class="h5">Rol</th>
+                    <th scope="col" class="h5">Acciones</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.id, new { @class = "text-danger"})</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.username)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.email)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.first_name)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.middle_name)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.last_name)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.second_last_name)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.country.name1)</td>
+                        <td class="h6">@Html.DisplayFor(modelItem => item.role.name)</td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @class = "btn btn-primary"})
+                            @Html.ActionLink("Detalles", "Details", new { id = item.id }, new { @class = "btn btn-default"})
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+    <div class="row">
+        <a href="@Url.Action("Create","User")" class="btn btn-default">Crear Usuario</a>
+    </div>
+</div>

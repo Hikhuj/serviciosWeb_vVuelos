@@ -14,7 +14,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        <label class="control-label col-md-2">Username</label>
+        <label class="control-label col-md-2">Nombre de Usuario</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Correo</label>
+        <label class="control-label col-md-2">Correo electrónico</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Confirmacion de Contraseña</label>
+        <label class="control-label col-md-2">Confirmar Contraseña</label>
         <div class="col-md-10">
             @Html.Password("confirmacion",null, new { @class = "form-control", name = "password", placeHolder = "password", autofocus = "" ,onkeyup= "comparePw()" })
             <span class="text-danger" id="validation-confirmation" style="display:none"></span>
@@ -80,7 +80,7 @@
     @Html.Hidden("rol_id_FK", 6)
 
     <div class="form-group">
-        <label class="control-label col-md-2">Pais</label>
+        <label class="control-label col-md-2">País</label>
         <div class="col-md-10">
             @Html.DropDownList("consecutive_country_id", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.consecutive_country_id, "", new { @class = "text-danger" })
@@ -105,7 +105,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-default" />
+            <input type="submit" value="Registrarse" class="btn btn-default" />
             <input type="button" value="Cancelar" class="btn btn-danger" onclick="document.location='../../Auth/Login'" />
         </div>
     </div>

@@ -1,0 +1,3 @@
+﻿function emptyField(data) {
+
+}

@@ -29,91 +29,39 @@ namespace vVuelos.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string user_password)
+        public ActionResult Login(string username, string new_password)
         {
-
-            // Validar si el user name o password es valido
-            if(username == null || user_password == null)
+            if (username != null && new_password != null)
             {
-                ViewBag.error = "Por favor llene los campos";
-                return View();
-            }
-            else
-            {
-
-                user currentUser;
-                string currentPw;
-
-                try
+                user currentUser = db.users.Where(m => m.username == username).FirstOrDefault();
+                string currentPw = Encryption.DecryptData(currentUser.new_password);
+                if (currentUser != null && currentUser.username == username && currentPw.Equals(new_password))
                 {
-                    currentUser = db.users.Where(m => m.username == username).FirstOrDefault();
-                    currentPw = Encryption.DecryptData(currentUser.new_password);
-
-                    if (currentUser != null && currentUser.username == username && currentPw.Equals(new_password))
-                    {
-                        //creating authentication ticket (will go insde the cookie)
-                        var authTicket = new FormsAuthenticationTicket(
-                              1,
-                              currentUser.id.ToString(),  //user id
-                              DateTime.Now,
-                              DateTime.Now.AddMinutes(15),  // expiry after 15 minutes of not using the system
-                              false,  //true to remember -> REMEMBER ME OPTION
-                              "", //roles 
-                              "/"
-                            );
-                        //encrypt the ticket and add it to a cookie
-                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
-                        Response.Cookies.Add(cookie);
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        ViewBag.error = "usuario or contraseña incorrecta";
-                        return View();
-                    }
-                }
-                catch (Exception e)
-                {
-                    ViewBag.error = "Usuario o contraseña";
-                    return View();
-                }
-
-                /*
-                if (username != null || user_password != null)
-                {
-                    user currentUser = db.users.Where(m => m.username == username).FirstOrDefault();
-                    string currentPw = Encryption.DecryptData(currentUser.user_password);
-                    if (currentUser != null && currentUser.username == username && currentPw.Equals(new_password))
-                    {
-                        //creating authentication ticket (will go insde the cookie)
-                        var authTicket = new FormsAuthenticationTicket(
-                              1,
-                              currentUser.id.ToString(),  //user id
-                              DateTime.Now,
-                              DateTime.Now.AddMinutes(15),  // expiry after 15 minutes of not using the system
-                              false,  //true to remember -> REMEMBER ME OPTION
-                              "", //roles 
-                              "/"
-                            );
-                        //encrypt the ticket and add it to a cookie
-                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
-                        Response.Cookies.Add(cookie);
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        ViewBag.error = "usuario or contraseña incorrecta";
-                        return View();
-                    }
+                    //creating authentication ticket (will go insde the cookie)
+                    var authTicket = new FormsAuthenticationTicket(
+                          1,
+                          currentUser.id.ToString(),  //user id
+                          DateTime.Now,
+                          DateTime.Now.AddMinutes(15),  // expiry after 15 minutes of not using the system
+                          false,  //true to remember -> REMEMBER ME OPTION
+                          "", //roles 
+                          "/"
+                        );
+                    //encrypt the ticket and add it to a cookie
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+                    Response.Cookies.Add(cookie);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ViewBag.error = "Por favor llene los campos";
+                    ViewBag.error = "usuario or contraseña incorrecta";
                     return View();
                 }
-                */
-                // ViewBag.error = "Por favor llene los campos";
-                // return View();
+            }
+            else
+            {
+                ViewBag.error = "Por favor llene los campos";
+                return View();
             }
 
         }

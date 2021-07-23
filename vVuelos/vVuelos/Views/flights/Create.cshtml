@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Crear Vuelo</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,12 +13,12 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>flight</h4>
+    <h4><i>Vuelos</i></h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        <label class="control-label col-md-2">Codigo</label>
+        <label class="control-label col-md-2">Código</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Aerolinea</label>
+        <label class="control-label col-md-2">Aerolínea</label>
         <div class="col-md-10">
             @Html.DropDownList("consecutive_airline_id", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.consecutive_airline_id, "", new { @class = "text-danger" })
@@ -88,14 +88,14 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-success" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Departures", "flights")" class="btn btn-default">Volver</a>
 </div>
 
 @section Scripts {

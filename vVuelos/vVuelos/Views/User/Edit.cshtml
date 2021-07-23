@@ -18,7 +18,7 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            <label class = "control-label col-md-2">Username</label>
+            <label class = "control-label col-md-2">Usuario</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Email</label>
+            <label class="control-label col-md-2">Correo Electrónico</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Confirmacion</label>
+            <label class="control-label col-md-2">Confirmar</label>
             <div class="col-md-10">
                 @Html.PasswordFor(model => model.new_password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.new_password, "", new { @class = "text-danger" })
@@ -58,7 +58,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Segundo nombre</label>
+            <label class="control-label col-md-2">Segundo Nombre</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.middle_name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.middle_name, "", new { @class = "text-danger" })
@@ -74,7 +74,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Segundo apellido</label>
+            <label class="control-label col-md-2">Segundo Apellido</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.second_last_name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.second_last_name, "", new { @class = "text-danger" })
@@ -90,7 +90,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Pais</label>
+            <label class="control-label col-md-2">País</label>
             <div class="col-md-10">
                 @Html.DropDownList("consecutive_country_id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.consecutive_country_id, "", new { @class = "text-danger" })
@@ -115,14 +115,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="row">
+    <a href="@Url.Action("Index","User")" class="btn btn-default">Volver a la Lista</a>
 </div>
 
 @section Scripts {

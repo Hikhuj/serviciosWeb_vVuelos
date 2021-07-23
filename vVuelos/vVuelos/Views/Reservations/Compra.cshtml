@@ -4,72 +4,71 @@
     ViewBag.Title = "Compra";
 }
 
-<h2>Compra</h2>
+<h2>Comprar</h2>
+<hr />
 
-<section class="form-register">
-    <h4>Detalles del Tiquete</h4>
-
-    <label>Destino:</label>
-    <label id="destino">@Html.DisplayFor(model => model.city.name)</label>
-    <br>
-    <br>
-
-    <label>Fecha:</label>
-    <label id="arrival_date">@Html.DisplayFor(model => model.arrival_date)</label>
-    <br>
-    <br>
-
-    <label>Hora:</label>
-    <label id="arrival_time">@Html.DisplayFor(model => model.arrival_time)</label>
-    <br>
-    <br>
-
-    <label>Aerolinea:</label>
-    <label id="airline">@Html.DisplayFor(model => model.airline.name)</label>
-    <br>
-    <br>
-    <br>
-
-    <h4>Ingrese su informacion</h4>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <label>Numero de Tarjeta:</label>
-                <br />
-                <br />
-                <label>Nombre del Representante:</label>
-                <br />
-                <br />
-                <label>Fecha de expiracion:</label>
-                <br />
-                <br />
-                <label>CVV:</label>
+<div class="container">
+    <div class="row">
+        <h4><i>Detalles del tiquete</i></h4>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <label>Destino:</label>
+                <label id="destino">@Html.DisplayFor(model => model.city.name)</label>
             </div>
-            <div class="col-sm-2">
-                <input class="controls" type="text" name="numeroTarjeta" id="txtNumeroTarjeta" maxlength="11">
-                <br />
-                <br />
-                <input class="controls" type="text" name="nombreRepresentante" id="txtNombreRepresentante">
-                <br />
-                <br />
-                <input class="controls" type="text" name="fechaExpiracion" id="txtFechaExpiracion">
-                <br />
-                <br />
-                <input class="controls" type="text" name="cvv" id="txtCvv">
+            <div class="row">
+                <label>Fecha:</label>
+                <label id="arrival_date">@Html.DisplayFor(model => model.arrival_date)</label>
+            </div>
+            <div class="row">
+                <label>Hora:</label>
+                <label id="arrival_time">@Html.DisplayFor(model => model.arrival_time)</label>
+            </div>
+            <div class="row">
+                <label>Aerolínea:</label>
+                <label id="airline">@Html.DisplayFor(model => model.airline.name)</label>
             </div>
         </div>
     </div>
-    <br />
-    <div class="container">Total a pagar = <label id="total">$600</label></div>
-  
-    <br>
-    <input class="buttons" type="submit" id="btnComprar" value="Comprar">
+    <hr />
+    <div class="row">
+        <h4><i>Ingrese su información</i></h4>
+    </div>
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Número de Tarjeta:</label>
+                    <input class="controls" type="text" name="numeroTarjeta" id="txtNumeroTarjeta" maxlength="11">
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nombre del Representante:</label>
+                    <input class="controls" type="text" name="nombreRepresentante" id="txtNombreRepresentante">
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Fecha de expiracion:</label>
+                    <input class="controls" type="text" name="fechaExpiracion" id="txtFechaExpiracion">
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">CVV:</label>
+                    <input class="controls" type="text" name="cvv" id="txtCvv">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <p>Total a pagar <span id="total" class="mark text-primary">$600</span></p>
+    </div>
+    <div>
+        <!-- <input class="buttons" type="submit" id="btnComprar" value="Comprar"> -->
+        <!-- <input class="buttons" type="submit" id="btnEasyPay" @Html.ActionLink("Comprar", "compraEasyPay", "Reservations", new { id = Model.consecutive_flight_id }, null) value="Pagar con Easy Pay">-->
+        <!--<button class="btn btn-success" type="button" id="btnEasyPay"></button>-->
 
-    <!-- <input class="buttons" type="submit" id="btnEasyPay" @Html.ActionLink("Comprar", "compraEasyPay", "Reservations", new { id = Model.consecutive_flight_id }, null) value="Pagar con Easy Pay">-->
+        @Html.ActionLink("Pago EasyPay", "compraEasyPay", "Reservations", new { id = Model.consecutive_flight_id }, new { @class = "btn btn-success" })
+        <a href="@Url.Action("Departures", "flights")" class="btn btn-danger">Cancelar</a>
 
-    <button class="buttons" type="button" id="btnEasyPay">@Html.ActionLink("Pago EasyPay", "compraEasyPay", "Reservations", new { id = Model.consecutive_flight_id }, null)</button>
+        <!--<button class="btn btn-danger" type="button" id="btnCancelar" value="Cancelar">@Html.ActionLink("Cancelar", "Departure", "flights")</button>-->
 
-    <button class="buttons" type="button" id="btnCancelar" value="Cancelar">@Html.ActionLink("Cancelar","Departure","flights")</button>
-
-</section>
+    </div>
+</div>
