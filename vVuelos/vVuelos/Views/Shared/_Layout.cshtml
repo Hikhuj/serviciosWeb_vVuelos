@@ -24,20 +24,17 @@
                     <li>@Html.ActionLink("Reservas", "Departures", "flights", new { area = "" }, null)</li>
                 </ul>
                 <ul class="nav navbar-right navbar-nav">
-                    
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <img src="~/img/utils/user_icon.png" width="25" height="25">
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Perfil", "Perfil", "User")</li>
-                                <li>@Html.ActionLink("Admin", "Console", "Home")</li>
-                                <li>@Html.ActionLink("Cerrar sesión", "Logout", "Auth")</li>
-
-                            </ul>
-                        </li>
-                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <img src="~/img/utils/user_icon.png" width="25" height="25">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Perfil", "Perfil", "User")</li>
+                            <li>@Html.ActionLink("Admin", "Console", "Home")</li>
+                            <li>@Html.ActionLink("Cerrar sesión", "Logout", "Auth")</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
